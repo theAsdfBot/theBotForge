@@ -1,9 +1,9 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useState } from 'react'
 
-import ShippingDetails from './details/ShippingDetails';
+import ShippingDetails from './details/ShippingDetails'
 
 const BillingView: FunctionComponent = () => {
-  const [billingSameAsShipping, setSameAsBilling] = useState(false);
+  const [billingSameAsShipping, setSameAsBilling] = useState(false)
 
   const [billingDetails, setBillingDetails] = useState({
     firstName: '',
@@ -15,7 +15,7 @@ const BillingView: FunctionComponent = () => {
     country: '',
     zipCode: '',
     phone: '',
-  });
+  })
 
   const [shippingDetails, setShippingDetails] = useState({
     firstName: '',
@@ -27,7 +27,7 @@ const BillingView: FunctionComponent = () => {
     country: '',
     zipCode: '',
     phone: '',
-  });
+  })
 
   const [paymentDetails, setPaymentDetails] = useState({
     nameOnCard: '',
@@ -37,13 +37,13 @@ const BillingView: FunctionComponent = () => {
     securityCode: '',
     email: '',
     profileName: ''
-  });
+  })
 
   return (
     <div>
       <ShippingDetails shippingDetails={shippingDetails} setShippingDetails={setShippingDetails} billingSameAsShipping={billingSameAsShipping} />
     </div>
-  );
+  )
 }
 
-export default BillingView;
+export default BillingView

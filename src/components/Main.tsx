@@ -1,6 +1,6 @@
-import * as React from 'react';
+import * as React from 'react'
 
-import BillingView from './billing/BillingView';
+import BillingView from './billing/BillingView'
 
 const Main = () => {
   return (
@@ -11,4 +11,4 @@ const Main = () => {
   )
 }
 
-export default Main;
+export default Main

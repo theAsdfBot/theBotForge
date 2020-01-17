@@ -1,3 +1,5 @@
+import { UserInfo, PaymentInfo } from '../types/billingTypes'
+
 export const initialState = {
   billingSameAsShipping: false,
   billingDetails: {
@@ -33,6 +35,12 @@ export const initialState = {
   }
 }
 
+// Action Creators
+export const updateBillingDetails = (payload: UserInfo) => ({})
+export const updateShippingDetails = (payload: UserInfo) => ({})
+export const updatePaymentDetails = (payload: PaymentInfo) => ({})
+
+// Reducer for BillingView
 export const billingReducer = (state: any, action: any) => {  // need to change any typing
   switch (action.type) {
     default:

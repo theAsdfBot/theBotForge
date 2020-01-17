@@ -1,47 +1,14 @@
-import React, { FunctionComponent, useState } from 'react'
+import React, { FunctionComponent, useReducer } from 'react'
 
 import ShippingDetails from './details/ShippingDetails'
+import { billingReducer, initialState } from './BillingViewReducer'
 
 const BillingView: FunctionComponent = () => {
-  const [billingSameAsShipping, setSameAsBilling] = useState(false)
-
-  const [billingDetails, setBillingDetails] = useState({
-    firstName: '',
-    lastName: '',
-    address1: '',
-    address2: '',
-    city: '',
-    state: '',
-    country: '',
-    zipCode: '',
-    phone: '',
-  })
-
-  const [shippingDetails, setShippingDetails] = useState({
-    firstName: '',
-    lastName: '',
-    address1: '',
-    address2: '',
-    city: '',
-    state: '',
-    country: '',
-    zipCode: '',
-    phone: '',
-  })
-
-  const [paymentDetails, setPaymentDetails] = useState({
-    nameOnCard: '',
-    cardNumber: '',
-    expirationMonth: '',
-    expirationYear: '',
-    securityCode: '',
-    email: '',
-    profileName: ''
-  })
+  const [state, dispatch] = useReducer(billingReducer, initialState)
 
   return (
     <div>
-      <ShippingDetails shippingDetails={shippingDetails} setShippingDetails={setShippingDetails} billingSameAsShipping={billingSameAsShipping} />
+      {/* <ShippingDetails shippingDetails={shippingDetails} setShippingDetails={setShippingDetails} billingSameAsShipping={billingSameAsShipping} /> */}
     </div>
   )
 }

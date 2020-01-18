@@ -7,15 +7,16 @@ import PaymentDetails from './details/PaymentDetails'
 
 const BillingView: FunctionComponent = () => {
   const [state, dispatch] = useReducer(billingReducer, initialState)
+  const { billingDetails, shippingDetails, paymentDetails, billingSameAsShipping } = state
 
   const toggleBillingSameAsShippingDetails = (e: any) => dispatch(toggleBillingSameAsShipping())
 
   return (
     <div>
-      <BillingDetails billingDetails={state.billingDetails} dispatch={dispatch} />
-      <ShippingDetails shippingDetails={state.shippingDetails} dispatch={dispatch} billingSameAsShipping={state.billingSameAsShipping} />
-      <PaymentDetails paymentDetails={state.paymentDetails} dispatch={dispatch} />
-      <input type='checkbox' name='shipToBilling' checked={state.billingSameAsShipping} onChange={toggleBillingSameAsShippingDetails} />
+      <BillingDetails billingDetails={billingDetails} dispatch={dispatch} />
+      <ShippingDetails shippingDetails={shippingDetails} dispatch={dispatch} billingSameAsShipping={billingSameAsShipping} />
+      <PaymentDetails paymentDetails={paymentDetails} dispatch={dispatch} />
+      <input type='checkbox' name='shipToBilling' checked={billingSameAsShipping} onChange={toggleBillingSameAsShippingDetails} />
       <label>Ship to Billing</label>
     </div>
   )

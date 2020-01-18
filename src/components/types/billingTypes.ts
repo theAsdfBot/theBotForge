@@ -13,6 +13,7 @@ export interface UserInfo {
   country: string,
   zipCode: string,
   phone: string,
+  [index:string]: string
 }
 
 export interface PaymentInfo {
@@ -22,7 +23,8 @@ export interface PaymentInfo {
   expirationYear: string,
   securityCode: string,
   email: string,
-  profileName: string
+  profileName: string,
+  [index:string]: string
 }
 
 // initial state type

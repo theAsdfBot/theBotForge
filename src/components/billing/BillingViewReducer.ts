@@ -66,7 +66,7 @@ export const toggleBillingSameAsShipping = (): BillingActionType => ({
 
 // Reducer for BillingView
 // TODO: figure out the return type for the reducer. using type any now as a crutch
-export const billingReducer = (state: BillingState, action: BillingActionType): any => {
+export const billingReducer = (state: BillingState, action: BillingActionType): BillingState => {
   switch (action.type) {
     case UPDATE_BILLING_DETAILS:
       return { ...state, billingDetails: action.payload }

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useReducer, useState, useEffect } from 'react'
+import React, { FunctionComponent, useReducer, useState } from 'react'
 
 import {
   UserInfo,
@@ -50,23 +50,12 @@ const BillingView: FunctionComponent = () => {
     const previousValue = billingSameAsShipping
     if (previousValue) {
       setShippingState(initialUserInfo)
+      setBillingSameAsShipping(false)
     } else {
       setShippingState({ ...billingState })
+      setBillingSameAsShipping(true)
     }
   }
-
-  useEffect(() => {
-    let matches = true
-    for (const key in billingState) {
-      if (billingState[key] !== shippingState[key]) {
-        matches = false
-        break
-      }
-    }
-    if (matches !== billingSameAsShipping) {
-      setBillingSameAsShipping(matches)
-    }
-  })
 
   return (
     <div>

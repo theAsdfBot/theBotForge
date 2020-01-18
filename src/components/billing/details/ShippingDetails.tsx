@@ -1,11 +1,14 @@
-import React, { FunctionComponent, ChangeEvent, Dispatch } from 'react'
+import React, { FunctionComponent } from 'react'
 
-import { UserInfo } from '../../types/billingTypes'
+import {
+  UserInfo,
+  UserInfoUpdate
+} from '../../types/billingTypes'
 
 type ShippingDetailsProps = {
   shippingDetails: UserInfo,
   billingSameAsShipping: boolean,
-  setState: any // need to change
+  setState: React.Dispatch<UserInfoUpdate>
 }
 
 const ShippingDetails: FunctionComponent<ShippingDetailsProps> = (props) => {

@@ -2,7 +2,9 @@ import React, { FunctionComponent, useReducer, useState, useEffect } from 'react
 
 import {
   UserInfo,
-  PaymentInfo
+  UserInfoUpdate,
+  PaymentInfo,
+  PaymentInfoUpdate
 } from '../types/billingTypes'
 import BillingDetails from './details/BillingDetails'
 import ShippingDetails from './details/ShippingDetails'
@@ -20,7 +22,7 @@ const initialUserInfo: UserInfo = {
   phone: '',
 }
 
-const userStateReducer = (state: UserInfo = initialUserInfo, data: UserInfo): UserInfo => {
+const userStateReducer = (state: UserInfo = initialUserInfo, data: UserInfoUpdate): UserInfo => {
   return { ...state, ...data }
 }
 
@@ -34,7 +36,7 @@ const initialPaymentInfo: PaymentInfo = {
   profileName: ''
 }
 
-const paymentStateReducer = (state: PaymentInfo = initialPaymentInfo, data: PaymentInfo): PaymentInfo => {
+const paymentStateReducer = (state: PaymentInfo = initialPaymentInfo, data: PaymentInfoUpdate): PaymentInfo => {
   return { ...state, ...data }
 }
 

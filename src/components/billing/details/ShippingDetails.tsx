@@ -18,6 +18,7 @@ const ShippingDetails: FunctionComponent<ShippingDetailsProps> = (props) => {
 
   return (
     <div>
+      <h4>Shipping Details</h4>
       <input disabled={billingSameAsShipping} type='text' name='firstName' placeholder='First Name' value={firstName} onChange={onChange} />
       <input disabled={billingSameAsShipping} type='text' name='lastName' placeholder='Last Name' value={lastName} onChange={onChange} />
       <input disabled={billingSameAsShipping} type='text' name='address1' placeholder='Address 1' value={address1} onChange={onChange} />

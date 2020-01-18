@@ -69,6 +69,9 @@ export const toggleBillingSameAsShipping = (): BillingActionType => ({
 export const billingReducer = (state: BillingState, action: BillingActionType): any => {
   switch (action.type) {
     case UPDATE_BILLING_DETAILS:
+      if (state.billingSameAsShipping) {
+        return { ...state, billingDetails: action.payload, shippingDetails: action.payload }
+      }
       return { ...state, billingDetails: action.payload }
     case UPDATE_SHIPPING_DETAILS:
       return { ...state, shippingDetails: action.payload }

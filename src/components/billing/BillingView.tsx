@@ -1,7 +1,9 @@
 import React, { FunctionComponent, useReducer } from 'react'
 
-import ShippingDetails from './details/ShippingDetails'
 import { billingReducer, initialState, toggleBillingSameAsShipping } from './BillingViewReducer'
+import BillingDetails from './details/BillingDetails'
+import ShippingDetails from './details/ShippingDetails'
+import PaymentDetails from './details/PaymentDetails'
 
 const BillingView: FunctionComponent = () => {
   const [state, dispatch] = useReducer(billingReducer, initialState)
@@ -10,8 +12,11 @@ const BillingView: FunctionComponent = () => {
 
   return (
     <div>
+      <BillingDetails billingDetails={state.billingDetails} dispatch={dispatch} />
       <ShippingDetails shippingDetails={state.shippingDetails} dispatch={dispatch} billingSameAsShipping={state.billingSameAsShipping} />
-      <input type='checkbox' name='Ship to Billing' checked={state.billingSameAsShipping} onChange={toggleBillingSameAsShippingDetails} />
+      <PaymentDetails paymentDetails={state.paymentDetails} dispatch={dispatch} />
+      <input type='checkbox' name='shipToBilling' checked={state.billingSameAsShipping} onChange={toggleBillingSameAsShippingDetails} />
+      <label>Ship to Billing</label>
     </div>
   )
 }

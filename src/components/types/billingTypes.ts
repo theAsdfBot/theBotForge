@@ -18,9 +18,9 @@ export interface UserInfo {
 export interface PaymentInfo {
   nameOnCard: string,
   cardNumber: string,
-  expirationMonth: number,
-  expirationYear: number,
-  securityCode: number,
+  expirationMonth: string,
+  expirationYear: string,
+  securityCode: string,
   email: string,
   profileName: string
 }

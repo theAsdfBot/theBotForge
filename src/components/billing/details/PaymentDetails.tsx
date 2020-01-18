@@ -1,18 +1,18 @@
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent, ChangeEvent, Dispatch } from 'react'
 
-import { PaymentInfo } from '../../types/billingTypes'
+import { PaymentInfo, BillingActionType } from '../../types/billingTypes'
 import { updatePaymentDetails } from '../BillingViewReducer'
 
 type PaymentDetailsProps = {
   paymentDetails: PaymentInfo,
-  dispatch: any // need to change
+  dispatch: Dispatch<BillingActionType>
 }
 
 const PaymentDetails: FunctionComponent<PaymentDetailsProps> = (props) => {
   const { paymentDetails, dispatch } = props
   const { nameOnCard, cardNumber, expirationMonth, expirationYear, securityCode, email, profileName } = paymentDetails
 
-  const onChange = (e: any) => dispatch(updatePaymentDetails({ ...paymentDetails, [e.target.name]: e.target.value }))
+  const onChange = (e: ChangeEvent<HTMLInputElement>): void => dispatch(updatePaymentDetails({ ...paymentDetails, [e.target.name]: e.target.value }))
 
   return (
     <div>

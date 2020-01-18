@@ -45,23 +45,28 @@ export const initialState = {
 }
 
 // Action Creators
-export const updateBillingDetails = (payload: UserInfo) => ({
+export const updateBillingDetails = (payload: UserInfo): BillingActionType => ({
   type: UPDATE_BILLING_DETAILS,
   payload
 })
 
-export const updateShippingDetails = (payload: UserInfo) => ({
+export const updateShippingDetails = (payload: UserInfo): BillingActionType => ({
   type: UPDATE_SHIPPING_DETAILS,
   payload
 })
 
-export const updatePaymentDetails = (payload: PaymentInfo) => ({
+export const updatePaymentDetails = (payload: PaymentInfo): BillingActionType => ({
   type: UPDATE_PAYMENT_DETAILS,
   payload
 })
 
+export const toggleBillingSameAsShipping = (): BillingActionType => ({
+  type: BILLING_SAME_AS_SHIPPING
+})
+
 // Reducer for BillingView
-export const billingReducer = (state: BillingState, action: BillingActionType): BillingState => {  // need to change any typing
+// TODO: figure out the return type for the reducer. using type any now as a crutch
+export const billingReducer = (state: BillingState, action: BillingActionType): any => {
   switch (action.type) {
     case UPDATE_BILLING_DETAILS:
       return { ...state, billingDetails: action.payload }

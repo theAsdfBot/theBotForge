@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent, ChangeEvent } from 'react'
 
 import {
   UserInfo,
@@ -15,8 +15,7 @@ const ShippingDetails: FunctionComponent<ShippingDetailsProps> = (props) => {
   const { shippingDetails, billingSameAsShipping, setState } = props
   const { firstName, lastName, address1, address2, city, state, country, zipCode, phone } = shippingDetails
 
-  // not sure what event type is the onChange event so setting it to any for now
-  const onChange = (e: any): void => setState({ [e.target.name]: e.target.value })
+  const onChange = (e: ChangeEvent<HTMLInputElement>): void => setState({ [e.target.name]: e.target.value })
 
   return (
     <div>

@@ -41,12 +41,12 @@ const paymentStateReducer = (state: PaymentInfo = initialPaymentInfo, data: Paym
 }
 
 const BillingView: FunctionComponent = () => {
-  const [ billingState, setBillingState ] = useReducer(userStateReducer, initialUserInfo)
-  const [ shippingState, setShippingState ] = useReducer(userStateReducer, initialUserInfo)
-  const [ paymentState, setPaymentState ] = useReducer(paymentStateReducer, initialPaymentInfo)
-  const [ billingSameAsShipping, setBillingSameAsShipping ] = useState(false)
+  const [billingState, setBillingState] = useReducer(userStateReducer, initialUserInfo)
+  const [shippingState, setShippingState] = useReducer(userStateReducer, initialUserInfo)
+  const [paymentState, setPaymentState] = useReducer(paymentStateReducer, initialPaymentInfo)
+  const [billingSameAsShipping, setBillingSameAsShipping] = useState(false)
 
-  function toggleBillingMatchShipping () {
+  function toggleBillingMatchShipping() {
     const previousValue = billingSameAsShipping
     if (previousValue) {
       setShippingState(initialUserInfo)

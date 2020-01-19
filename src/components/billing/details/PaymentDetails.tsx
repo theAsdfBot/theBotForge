@@ -1,13 +1,12 @@
 import React, { FunctionComponent } from 'react'
 
 import {
-  PaymentInfo,
-  PaymentInfoUpdate
+  PaymentInfo
 } from '../../types/billingTypes'
 
 type PaymentDetailsProps = {
   paymentDetails: PaymentInfo,
-  setState: React.Dispatch<PaymentInfoUpdate>
+  setState: React.Dispatch<Partial<PaymentInfo>>
 }
 
 const PaymentDetails: FunctionComponent<PaymentDetailsProps> = (props) => {

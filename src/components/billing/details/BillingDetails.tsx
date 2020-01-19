@@ -4,7 +4,7 @@ import { UserInfo } from '../../types/billingTypes'
 
 type BillingDetailsProps = {
   billingDetails: UserInfo,
-  setState: any // need to change
+  setState: React.Dispatch<Partial<UserInfo>> // need to change
 }
 
 const BillingDetails: FunctionComponent<BillingDetailsProps> = (props) => {

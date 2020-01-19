@@ -1,18 +1,18 @@
-import React, { FunctionComponent, ChangeEvent, Dispatch } from 'react'
+import React, { FunctionComponent } from 'react'
 
-import { UserInfo, BillingActionType } from '../../types/billingTypes'
-import { updateBillingDetails } from '../BillingViewReducer'
+import { UserInfo } from '../../types/billingTypes'
 
 type BillingDetailsProps = {
   billingDetails: UserInfo,
-  dispatch: Dispatch<BillingActionType>
+  setState: any // need to change
 }
 
 const BillingDetails: FunctionComponent<BillingDetailsProps> = (props) => {
-  const { billingDetails, dispatch } = props
+  const { billingDetails, setState } = props
   const { firstName, lastName, address1, address2, city, state, country, zipCode, phone } = billingDetails
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>): void => dispatch(updateBillingDetails({ ...billingDetails, [e.target.name]: e.target.value }))
+  // not sure what event type is the onChange event so setting it to any for now
+  const onChange = (e: any): void => setState({ [e.target.name]: e.target.value })
 
   return (
     <div>

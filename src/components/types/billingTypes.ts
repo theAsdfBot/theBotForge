@@ -21,11 +21,3 @@ export interface PaymentInfo {
   profileName: string,
   [index: string]: string
 }
-
-export interface BillingState {
-  billingSameAsShipping: boolean,
-  billingDetails: UserInfo,
-  shippingDetails: UserInfo,
-  paymentDetails: PaymentInfo
-
-}

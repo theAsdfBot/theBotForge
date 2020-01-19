@@ -1,14 +1,13 @@
 import React, { FunctionComponent, ChangeEvent } from 'react'
 
 import {
-  UserInfo,
-  UserInfoUpdate
+  UserInfo
 } from '../../types/billingTypes'
 
 type ShippingDetailsProps = {
   shippingDetails: UserInfo,
   billingSameAsShipping: boolean,
-  setState: React.Dispatch<UserInfoUpdate>
+  setState: React.Dispatch<Partial<UserInfo>>
 }
 
 const ShippingDetails: FunctionComponent<ShippingDetailsProps> = (props) => {

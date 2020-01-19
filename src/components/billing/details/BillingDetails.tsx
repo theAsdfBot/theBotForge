@@ -1,10 +1,10 @@
 import React, { FunctionComponent, ChangeEvent } from 'react'
 
-import { UserInfo, UserInfoUpdate } from '../../types/billingTypes'
+import { UserInfo } from '../../types/billingTypes'
 
 type BillingDetailsProps = {
   billingDetails: UserInfo,
-  setState: React.Dispatch<UserInfoUpdate>
+  setState: React.Dispatch<Partial<UserInfo>>
 }
 
 const BillingDetails: FunctionComponent<BillingDetailsProps> = (props) => {

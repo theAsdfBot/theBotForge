@@ -8,7 +8,7 @@ export interface UserInfo {
   country: string,
   zipCode: string,
   phone: string,
-  [index:string]: string
+  [index: string]: string
 }
 
 export interface PaymentInfo {
@@ -19,13 +19,13 @@ export interface PaymentInfo {
   securityCode: string,
   email: string,
   profileName: string,
-  [index:string]: string
+  [index: string]: string
 }
 
-// initial state type
 export interface BillingState {
   billingSameAsShipping: boolean,
   billingDetails: UserInfo,
   shippingDetails: UserInfo,
   paymentDetails: PaymentInfo
+
 }

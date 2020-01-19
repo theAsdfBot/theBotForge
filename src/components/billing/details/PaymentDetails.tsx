@@ -13,7 +13,7 @@ const PaymentDetails: FunctionComponent<PaymentDetailsProps> = (props) => {
   const { paymentDetails, setState } = props
   const { nameOnCard, cardNumber, expirationMonth, expirationYear, securityCode, email, profileName } = paymentDetails
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => setState({ [e.target.name]: e.target.value })
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => setState({ ...paymentDetails, [e.target.name]: e.target.value })
 
   return (
     <div>

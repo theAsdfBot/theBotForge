@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react'
 
 import {
   PaymentInfo
-} from '../../../types/componentTypes/billingTypes'
+} from '@component_types/billingTypes'
 
 type PaymentDetailsProps = {
   paymentDetails: PaymentInfo,

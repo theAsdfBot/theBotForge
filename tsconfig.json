@@ -14,10 +14,11 @@
     "paths": {
       "*": [
         "node_modules/*"
-      ]
+      ],
+      "@component_types/*": ["src/types/componentTypes/*"]
     }
   },
   "include": [
     "src/**/*"
-  ]
+  ],
 }

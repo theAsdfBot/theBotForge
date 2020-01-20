@@ -3,7 +3,7 @@ import React, { FunctionComponent, useReducer, useState } from 'react'
 import {
   UserInfo,
   PaymentInfo,
-} from '../../types/componentTypes/billingTypes'
+} from '@component_types/billingTypes'
 import BillingDetails from './details/BillingDetails'
 import ShippingDetails from './details/ShippingDetails'
 import PaymentDetails from './details/PaymentDetails'

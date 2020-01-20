@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ChangeEvent } from 'react'
 
-import { UserInfo } from '../../types/billingTypes'
+import { UserInfo } from '@component_types/billingTypes'
 
 type BillingDetailsProps = {
   billingDetails: UserInfo,

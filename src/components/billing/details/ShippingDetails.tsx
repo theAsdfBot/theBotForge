@@ -2,7 +2,7 @@ import React, { FunctionComponent, ChangeEvent } from 'react'
 
 import {
   UserInfo
-} from '../../types/billingTypes'
+} from '@component_types/billingTypes'
 
 type ShippingDetailsProps = {
   shippingDetails: UserInfo,

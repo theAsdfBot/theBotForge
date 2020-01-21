@@ -1,20 +1,27 @@
 import React, { FunctionComponent, ChangeEvent } from 'react'
-
 import {
-  UserInfo
+  UserInfo,
+  StoreAction
 } from '@component_types/billingTypes'
+import {
+  UPDATE_SHIPPING_KEY
+} from '../store/actions'
 
 type ShippingDetailsProps = {
   shippingDetails: UserInfo,
   billingSameAsShipping: boolean,
-  setState: React.Dispatch<Partial<UserInfo>>
+  dispatch: React.Dispatch<StoreAction>
 }
 
 const ShippingDetails: FunctionComponent<ShippingDetailsProps> = (props) => {
-  const { shippingDetails, billingSameAsShipping, setState } = props
+  const { shippingDetails, billingSameAsShipping, dispatch } = props
   const { firstName, lastName, address1, address2, city, state, country, zipCode, phone } = shippingDetails
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>): void => setState({ [e.target.name]: e.target.value })
+  const onChange = (e: ChangeEvent<HTMLInputElement>): void => dispatch({
+    type: UPDATE_SHIPPING_KEY,
+    key: e.target.name,
+    value: e.target.value
+  })
 
   return (
     <div>

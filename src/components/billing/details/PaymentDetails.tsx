@@ -1,19 +1,26 @@
 import React, { FunctionComponent } from 'react'
-
 import {
-  PaymentInfo
+  PaymentInfo,
+  StoreAction
 } from '@component_types/billingTypes'
+import {
+  UPDATE_PAYMENT_KEY
+} from '../store/actions'
 
 type PaymentDetailsProps = {
   paymentDetails: PaymentInfo,
-  setState: React.Dispatch<Partial<PaymentInfo>>
+  dispatch: React.Dispatch<StoreAction>
 }
 
 const PaymentDetails: FunctionComponent<PaymentDetailsProps> = (props) => {
-  const { paymentDetails, setState } = props
+  const { paymentDetails, dispatch } = props
   const { nameOnCard, cardNumber, expirationMonth, expirationYear, securityCode, email, profileName } = paymentDetails
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => setState({ ...paymentDetails, [e.target.name]: e.target.value })
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => dispatch({
+    type: UPDATE_PAYMENT_KEY,
+    key: e.target.name,
+    value: e.target.value
+  })
 
   return (
     <div>

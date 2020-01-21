@@ -5,7 +5,8 @@ import {
   SET_INPUT_FIELD_ERROR, 
   CLEAR_INPUT_FIELD_ERROR,
   InputFieldErrorActionTypes
-} from '../../types/componentTypes/billingTypes'
+} from '../../types/component/billingTypes'
+//'@component_types/billingTypes' for some reason webpack is missing the module if we use the alias (need to investigate)
 
 export const initialUserInfo: UserInfo = {
   firstName: '',

@@ -21,3 +21,44 @@ export interface PaymentInfo {
   profileName: string,
   [index: string]: string
 }
+
+type UserInfoErrors = {
+  firstName: boolean,
+  lastName: boolean,
+  address1: boolean,
+  city: boolean,
+  state: boolean,
+  country: boolean,
+  zipCode: boolean,
+  phone: boolean,
+}
+
+type PaymentInfoErrors = {
+  nameOnCard: boolean,
+  cardNumber: boolean,
+  expirationMonth: boolean,
+  expirationYear: boolean,
+  securityCode: boolean,
+  email: boolean,
+  profileName: boolean,
+}
+
+export interface BillingErrors{
+  BillingDetails: UserInfoErrors,
+  ShippingDetails: UserInfoErrors,
+  PaymentDetails: PaymentInfoErrors
+}
+
+export const SET_INPUT_FIELD_ERROR = 'SET_INPUT_FIELD_ERROR'
+export const CLEAR_INPUT_FIELD_ERROR = 'CLEAR_INPUT_FIELD_ERROR'
+
+interface SetInputFieldErrorAction {
+  type: typeof SET_INPUT_FIELD_ERROR,
+  payload: BillingErrors,
+}
+
+interface ClearInputFieldErrorAction {
+  type: typeof CLEAR_INPUT_FIELD_ERROR
+}
+
+export type InputFieldErrorActionTypes = SetInputFieldErrorAction | ClearInputFieldErrorAction

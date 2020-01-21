@@ -1,9 +1,13 @@
 import React, { FunctionComponent } from 'react'
 
-const BillingProfileActionButtons: FunctionComponent = () => {
+type BillingProfileActionButtonsProps = {
+  saveProfile: () => void
+}
+
+const BillingProfileActionButtons: FunctionComponent<BillingProfileActionButtonsProps> = ({ saveProfile }) => {
   return (
     <div>
-      <button>Save Profile</button>
+      <button onClick={saveProfile}>Save Profile</button>
       <button>Delete Profile</button>
       <button>Duplicate Profile</button>
     </div>

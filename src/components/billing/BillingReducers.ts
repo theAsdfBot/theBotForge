@@ -5,7 +5,7 @@ import {
   SET_INPUT_FIELD_ERROR, 
   CLEAR_INPUT_FIELD_ERROR,
   InputFieldErrorActionTypes
-} from '@component_types/billingTypes'
+} from '../../types/componentTypes/billingTypes'
 
 export const initialUserInfo: UserInfo = {
   firstName: '',
@@ -52,7 +52,7 @@ export const clearInputFieldError = (): InputFieldErrorActionTypes => {
 }
 
 export const initialErrorState = {
-  BillingDetails: {
+  billingDetails: {
     firstName: false,
     lastName: false,
     address1: false,
@@ -62,18 +62,17 @@ export const initialErrorState = {
     zipCode: false,
     phone: false,
   },
-  ShippingDetails: {
+  shippingDetails: {
     firstName: false,
     lastName: false,
     address1: false,
-    address2: false,
     city: false,
     state: false,
     country: false,
     zipCode: false,
     phone: false,
   }, 
-  PaymentDetails: {
+  paymentDetails: {
     nameOnCard: false,
     cardNumber: false,
     expirationMonth: false,

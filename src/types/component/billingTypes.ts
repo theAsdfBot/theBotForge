@@ -22,7 +22,7 @@ export interface PaymentInfo {
   [index: string]: string
 }
 
-type UserInfoErrors = {
+export type UserInfoErrors = {
   firstName: boolean,
   lastName: boolean,
   address1: boolean,
@@ -33,7 +33,7 @@ type UserInfoErrors = {
   phone: boolean,
 }
 
-type PaymentInfoErrors = {
+export type PaymentInfoErrors = {
   nameOnCard: boolean,
   cardNumber: boolean,
   expirationMonth: boolean,
@@ -44,9 +44,9 @@ type PaymentInfoErrors = {
 }
 
 export interface BillingErrors{
-  BillingDetails: UserInfoErrors,
-  ShippingDetails: UserInfoErrors,
-  PaymentDetails: PaymentInfoErrors
+  billingDetails: UserInfoErrors,
+  shippingDetails: UserInfoErrors,
+  paymentDetails: PaymentInfoErrors
 }
 
 export const SET_INPUT_FIELD_ERROR = 'SET_INPUT_FIELD_ERROR'

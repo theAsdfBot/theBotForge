@@ -19,7 +19,7 @@
         "src/types/component/*"
       ],
       "@utils/*": [
-        "/src/utility/*"
+        "src/utility/*"
       ]
     }
   },

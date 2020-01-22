@@ -43,7 +43,7 @@ const BillingView: FunctionComponent = () => {
   function saveProfile() {
     const userInfoValidationKeys = Object.keys(userInfoValidation)
     const paymentInfoValidationKeys = Object.keys(paymentInfoValidation)
-    let isThereErrors = false
+    let areThereErrors = false
 
     // Shipping Details
     if (billingSameAsShipping === false) {
@@ -57,7 +57,7 @@ const BillingView: FunctionComponent = () => {
           // if it fails the is required validation, it break and dont run the rest until there's an input there
           if (error.length > 0) break
         }
-        if (error.length > 0 && isThereErrors === false) isThereErrors = true
+        if (error.length > 0) areThereErrors = true
         dispatchErrors({ type: SET_INPUT_FIELD_ERRORS_SHIPPING, key, value: error })
       })
     }
@@ -72,7 +72,7 @@ const BillingView: FunctionComponent = () => {
         error = fnc(inputVal)
         if (error.length > 0) break
       }
-      if (error.length > 0 && isThereErrors === false) isThereErrors = true
+      if (error.length > 0) areThereErrors = true
       dispatchErrors({ type: SET_INPUT_FIELD_ERRORS_BILLING, key, value: error })
     })
 
@@ -86,12 +86,12 @@ const BillingView: FunctionComponent = () => {
         error = fnc(inputVal)
         if (error.length > 0) break
       }
-      if (error.length > 0 && isThereErrors === false) isThereErrors = true
+      if (error.length > 0) areThereErrors = true
       dispatchErrors({ type: SET_INPUT_FIELD_ERRORS_PAYMENT, key, value: error })
     })
 
     // If there's no errors, save profile
-    if (isThereErrors === false) {
+    if (areThereErrors === false) {
       dispatchErrors({ type: CLEAR_INPUT_FIELD_ERRORS_ALL })
       // save profile
     }

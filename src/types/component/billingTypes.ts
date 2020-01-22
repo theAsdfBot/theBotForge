@@ -34,7 +34,7 @@ export interface StoreBaseAction {
 
 export interface StoreUpdate extends StoreBaseAction {
   key?: string,
-  value?: string,
+  value?: string
 }
 
 export type StoreAction = StoreUpdate

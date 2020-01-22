@@ -1,6 +1,6 @@
 import {
   Store,
-  StoreAction
+  StoreAction,
 } from '@component_types/billingTypes'
 
 import {
@@ -11,10 +11,11 @@ import {
   SET_INPUT_FIELD_ERRORS_BILLING,
   SET_INPUT_FIELD_ERRORS_SHIPPING,
   SET_INPUT_FIELD_ERRORS_PAYMENT,
+  POPULATE_INPUT_FIELD_ERRORS,
   CLEAR_INPUT_FIELD_ERRORS_BILLING,
   CLEAR_INPUT_FIELD_ERRORS_PAYMENT,
   CLEAR_INPUT_FIELD_ERRORS_SHIPPING,
-  CLEAR_INPUT_FIELD_ERRORS_ALL
+  CLEAR_INPUT_FIELD_ERRORS_ALL,
 } from './actions'
 
 export const initialStore: Store = {
@@ -88,11 +89,11 @@ export const billingProfileReducer = (state: Store = initialStore, payload: Stor
       return state
   }
 }
- 
+
 export const inputFieldErrorsReducer = (state: Store = initialStore, payload: StoreAction): Store => {
-  switch(payload.type){
+  switch (payload.type) {
     case SET_INPUT_FIELD_ERRORS_BILLING:
-      return { 
+      return {
         ...state,
         billing: {
           ...state.billing,
@@ -115,6 +116,7 @@ export const inputFieldErrorsReducer = (state: Store = initialStore, payload: St
           [payload.key]: payload.value
         }
       }
+    case POPULATE_INPUT_FIELD_ERRORS:
     case CLEAR_INPUT_FIELD_ERRORS_BILLING:
       return {
         ...state,
@@ -143,7 +145,7 @@ export const inputFieldErrorsReducer = (state: Store = initialStore, payload: St
       return {
         billing: {
           ...initialStore.billing
-        }, 
+        },
         shipping: {
           ...initialStore.shipping
         },

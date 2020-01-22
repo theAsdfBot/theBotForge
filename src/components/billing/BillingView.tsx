@@ -1,4 +1,5 @@
 import React, { FunctionComponent, useReducer, useState } from 'react'
+
 import BillingDetails from './details/BillingDetails'
 import ShippingDetails from './details/ShippingDetails'
 import PaymentDetails from './details/PaymentDetails'
@@ -9,14 +10,21 @@ import {
 import {
   SET_SHIPPING_TO_BILLING
 } from "./store/actions";
+import {
+  userInfoValidation,
+  paymentInfoValidation
+} from '../../utility /formValidation /billingProfile'
+
+// not sure why the alias wont work
+// import { userInfoValidation, paymentInfoValidation } from '@utils/formValidation/billingProfile'
 
 const BillingView: FunctionComponent = () => {
-  const [ store, dispatch ] = useReducer(billingProfileReducer, initialStore)
+  const [store, dispatch] = useReducer(billingProfileReducer, initialStore)
   const [billingSameAsShipping, setBillingSameAsShipping] = useState(false)
 
   function toggleBillingMatchShipping() {
     const previousValue = billingSameAsShipping
-    if (previousValue) {      
+    if (previousValue) {
       setBillingSameAsShipping(false)
     } else {
       dispatch({
@@ -24,6 +32,10 @@ const BillingView: FunctionComponent = () => {
       })
       setBillingSameAsShipping(true)
     }
+  }
+
+  function saveProfile() {
+
   }
 
   return (

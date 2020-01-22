@@ -15,7 +15,12 @@
       "*": [
         "node_modules/*"
       ],
-      "@component_types/*": ["src/types/component/*"]
+      "@component_types/*": [
+        "src/types/component/*"
+      ],
+      "@utils/*": [
+        "/src/utility/*"
+      ]
     }
   },
   "include": [

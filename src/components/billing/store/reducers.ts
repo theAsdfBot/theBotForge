@@ -7,7 +7,9 @@ import {
   UPDATE_BILLING_KEY,
   UPDATE_PAYMENT_KEY,
   UPDATE_SHIPPING_KEY,
-  SET_SHIPPING_TO_BILLING
+  SET_SHIPPING_TO_BILLING,
+  SET_INPUT_FIELD_ERRORS,
+  CLEAR_INPUT_FIELD_ERRORS
 } from './actions'
 
 export const initialStore: Store = {
@@ -44,7 +46,7 @@ export const initialStore: Store = {
   }
 }
 
-export const reducer = (state: Store = initialStore, payload: StoreAction): Store => {
+export const billingProfileReducer = (state: Store = initialStore, payload: StoreAction): Store => {
   switch (payload.type) {
     case SET_SHIPPING_TO_BILLING:
       return {
@@ -79,5 +81,36 @@ export const reducer = (state: Store = initialStore, payload: StoreAction): Stor
       }
     default:
       return state
+  }
+}
+ 
+export const inputFieldErrorsReducer = (state: Store = initialStore, payload: StoreAction) => {
+  switch(payload.type){
+    case SET_INPUT_FIELD_ERRORS:
+      return {
+        billing: {
+          ...payload.billing
+        },
+        shipping: {
+          ...payload.shipping
+        }, 
+        payment: {
+          ...payload.payment
+        }
+      }
+    case CLEAR_INPUT_FIELD_ERRORS:
+      return {
+        billing: {
+          ...initialStore.billing
+        },
+        shipping: {
+          ...initialStore.shipping
+        },
+        payment: {
+          ...initialStore.payment
+        }
+      }
+    default:
+        return state
   }
 }

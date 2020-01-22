@@ -4,14 +4,14 @@ import ShippingDetails from './details/ShippingDetails'
 import PaymentDetails from './details/PaymentDetails'
 import {
   initialStore,
-  reducer
+  billingProfileReducer
 } from './store/reducers'
 import {
   SET_SHIPPING_TO_BILLING
 } from "./store/actions";
 
 const BillingView: FunctionComponent = () => {
-  const [ store, dispatch ] = useReducer(reducer, initialStore)
+  const [ store, dispatch ] = useReducer(billingProfileReducer, initialStore)
   const [billingSameAsShipping, setBillingSameAsShipping] = useState(false)
 
   function toggleBillingMatchShipping() {

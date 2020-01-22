@@ -35,9 +35,9 @@ export interface StoreBaseAction {
 export interface StoreUpdate extends StoreBaseAction {
   key?: string,
   value?: string,
-  billing?: UserInfo, // not a fan of this abstraction to handle everything (looks weird)
-  shipping?: UserInfo,
-  payment?: PaymentInfo
+  billingErrors?: UserInfo, // not a fan of this abstraction to handle everything (looks weird)
+  shippingErrors?: UserInfo,
+  paymentErrors?: PaymentInfo
 }
 
 export type StoreAction = StoreUpdate

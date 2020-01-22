@@ -89,13 +89,13 @@ export const inputFieldErrorsReducer = (state: Store = initialStore, payload: St
     case SET_INPUT_FIELD_ERRORS:
       return {
         billing: {
-          ...payload.billingErrors
+          ...payload.billing
         },
         shipping: {
-          ...payload.shippingErrors
+          ...payload.shipping
         }, 
         payment: {
-          ...payload.paymentErrors
+          ...payload.payment
         }
       }
     case CLEAR_INPUT_FIELD_ERRORS:

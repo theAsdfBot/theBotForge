@@ -1,65 +1,36 @@
 import React, { FunctionComponent, useReducer, useState } from 'react'
-
-import {
-  UserInfo,
-  PaymentInfo,
-} from '@component_types/billingTypes'
 import BillingDetails from './details/BillingDetails'
 import ShippingDetails from './details/ShippingDetails'
 import PaymentDetails from './details/PaymentDetails'
-
-const initialUserInfo: UserInfo = {
-  firstName: '',
-  lastName: '',
-  address1: '',
-  address2: '',
-  city: '',
-  state: '',
-  country: '',
-  zipCode: '',
-  phone: '',
-}
-
-const userStateReducer = (state: UserInfo = initialUserInfo, data: Partial<UserInfo>): UserInfo => {
-  return { ...state, ...data }
-}
-
-const initialPaymentInfo: PaymentInfo = {
-  nameOnCard: '',
-  cardNumber: '',
-  expirationMonth: '',
-  expirationYear: '',
-  securityCode: '',
-  email: '',
-  profileName: ''
-}
-
-const paymentStateReducer = (state: PaymentInfo = initialPaymentInfo, data: Partial<PaymentInfo>): PaymentInfo => {
-  return { ...state, ...data }
-}
+import {
+  initialStore,
+  reducer
+} from './store/reducers'
+import {
+  SET_SHIPPING_TO_BILLING
+} from "./store/actions";
 
 const BillingView: FunctionComponent = () => {
-  const [billingState, setBillingState] = useReducer(userStateReducer, initialUserInfo)
-  const [shippingState, setShippingState] = useReducer(userStateReducer, initialUserInfo)
-  const [paymentState, setPaymentState] = useReducer(paymentStateReducer, initialPaymentInfo)
+  const [ store, dispatch ] = useReducer(reducer, initialStore)
   const [billingSameAsShipping, setBillingSameAsShipping] = useState(false)
 
   function toggleBillingMatchShipping() {
     const previousValue = billingSameAsShipping
-    if (previousValue) {
-      setShippingState(initialUserInfo)
+    if (previousValue) {      
       setBillingSameAsShipping(false)
     } else {
-      setShippingState({ ...billingState })
+      dispatch({
+        type: SET_SHIPPING_TO_BILLING
+      })
       setBillingSameAsShipping(true)
     }
   }
 
   return (
     <div>
-      <BillingDetails billingDetails={billingState} setState={setBillingState} />
-      <ShippingDetails shippingDetails={shippingState} setState={setShippingState} billingSameAsShipping={billingSameAsShipping} />
-      <PaymentDetails paymentDetails={paymentState} setState={setPaymentState} />
+      <BillingDetails billingDetails={store.billing} dispatch={dispatch} />
+      <ShippingDetails shippingDetails={store.shipping} dispatch={dispatch} billingSameAsShipping={billingSameAsShipping} />
+      <PaymentDetails paymentDetails={store.payment} dispatch={dispatch} />
       <input type='checkbox' name='shipToBilling' checked={billingSameAsShipping} onChange={toggleBillingMatchShipping} />
       <label>Ship to Billing</label>
     </div>

@@ -21,3 +21,20 @@ export interface PaymentInfo {
   profileName: string,
   [index: string]: string
 }
+
+export type Store = {
+  billing: UserInfo,
+  shipping: UserInfo,
+  payment: PaymentInfo
+}
+
+export interface StoreBaseAction {
+  type: string
+}
+
+export interface StoreUpdate extends StoreBaseAction {
+  key?: string,
+  value?: string
+}
+
+export type StoreAction = StoreUpdate

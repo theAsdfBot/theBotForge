@@ -8,8 +8,13 @@ import {
   UPDATE_PAYMENT_KEY,
   UPDATE_SHIPPING_KEY,
   SET_SHIPPING_TO_BILLING,
-  SET_INPUT_FIELD_ERRORS,
-  CLEAR_INPUT_FIELD_ERRORS
+  SET_INPUT_FIELD_ERRORS_BILLING,
+  SET_INPUT_FIELD_ERRORS_SHIPPING,
+  SET_INPUT_FIELD_ERRORS_PAYMENT,
+  CLEAR_INPUT_FIELD_ERRORS_BILLING,
+  CLEAR_INPUT_FIELD_ERRORS_PAYMENT,
+  CLEAR_INPUT_FIELD_ERRORS_SHIPPING,
+  CLEAR_INPUT_FIELD_ERRORS_ALL
 } from './actions'
 
 export const initialStore: Store = {
@@ -84,25 +89,61 @@ export const billingProfileReducer = (state: Store = initialStore, payload: Stor
   }
 }
  
-export const inputFieldErrorsReducer = (state: Store = initialStore, payload: StoreAction) => {
+export const inputFieldErrorsReducer = (state: Store = initialStore, payload: StoreAction): Store => {
   switch(payload.type){
-    case SET_INPUT_FIELD_ERRORS:
-      return {
+    case SET_INPUT_FIELD_ERRORS_BILLING:
+      return { 
+        ...state,
         billing: {
-          ...payload.billing
-        },
-        shipping: {
-          ...payload.shipping
-        }, 
-        payment: {
-          ...payload.payment
+          ...state.billing,
+          [payload.key]: payload.value
         }
       }
-    case CLEAR_INPUT_FIELD_ERRORS:
+    case SET_INPUT_FIELD_ERRORS_SHIPPING:
+      return {
+        ...state,
+        shipping: {
+          ...state.shipping,
+          [payload.key]: payload.value
+        }
+      }
+    case SET_INPUT_FIELD_ERRORS_PAYMENT:
+      return {
+        ...state,
+        payment: {
+          ...state.payment,
+          [payload.key]: payload.value
+        }
+      }
+    case CLEAR_INPUT_FIELD_ERRORS_BILLING:
+      return {
+        ...state,
+        billing: {
+          ...state.billing,
+          [payload.key]: ''
+        }
+      }
+    case CLEAR_INPUT_FIELD_ERRORS_SHIPPING:
+      return {
+        ...state,
+        shipping: {
+          ...state.shipping,
+          [payload.key]: ''
+        }
+      }
+    case CLEAR_INPUT_FIELD_ERRORS_PAYMENT:
+      return {
+        ...state,
+        payment: {
+          ...state.payment,
+          [payload.key]: ''
+        }
+      }
+    case CLEAR_INPUT_FIELD_ERRORS_ALL:
       return {
         billing: {
           ...initialStore.billing
-        },
+        }, 
         shipping: {
           ...initialStore.shipping
         },
@@ -111,6 +152,6 @@ export const inputFieldErrorsReducer = (state: Store = initialStore, payload: St
         }
       }
     default:
-        return state
+      return state
   }
 }

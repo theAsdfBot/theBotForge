@@ -14,7 +14,7 @@ import {
   SET_INPUT_FIELD_ERRORS_PAYMENT,
   SET_INPUT_FIELD_ERRORS_SHIPPING,
   CLEAR_INPUT_FIELD_ERRORS_ALL
-} from "./store/actions";
+} from "./store/actions"
 import {
   userInfoValidation,
   paymentInfoValidation,

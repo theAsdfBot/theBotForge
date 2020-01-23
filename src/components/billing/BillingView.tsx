@@ -13,7 +13,7 @@ import {
 import {
   userInfoValidation,
   paymentInfoValidation
-} from '../../utility/formValidation/billingProfile'
+} from './utils'
 
 // not sure why the alias wont work
 // import { userInfoValidation, paymentInfoValidation } from '@utils/formValidation/billingProfile'

@@ -17,9 +17,6 @@
       ],
       "@component_types/*": [
         "src/types/component/*"
-      ],
-      "@utils/*": [
-        "/src/utility/*"
       ]
     }
   },

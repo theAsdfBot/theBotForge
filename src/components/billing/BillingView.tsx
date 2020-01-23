@@ -5,21 +5,27 @@ import ShippingDetails from './details/ShippingDetails'
 import PaymentDetails from './details/PaymentDetails'
 import {
   initialStore,
-  billingProfileReducer
+  billingProfileReducer,
+  inputFieldErrorsReducer
 } from './store/reducers'
 import {
-  SET_SHIPPING_TO_BILLING
+  SET_SHIPPING_TO_BILLING,
+  SET_INPUT_FIELD_ERRORS_BILLING,
+  SET_INPUT_FIELD_ERRORS_PAYMENT,
+  SET_INPUT_FIELD_ERRORS_SHIPPING,
+  CLEAR_INPUT_FIELD_ERRORS_ALL
 } from "./store/actions";
+// import { userInfoValidation, paymentInfoValidation } from '@utils/formValidation/billingProfile'
 import {
   userInfoValidation,
-  paymentInfoValidation
+  paymentInfoValidation,
+  UserInfoKey,
+  PaymentInfoKey
 } from './utils'
-
-// not sure why the alias wont work
-// import { userInfoValidation, paymentInfoValidation } from '@utils/formValidation/billingProfile'
 
 const BillingView: FunctionComponent = () => {
   const [store, dispatch] = useReducer(billingProfileReducer, initialStore)
+  const [inputErrors, dispatchErrors] = useReducer(inputFieldErrorsReducer, initialStore)
   const [billingSameAsShipping, setBillingSameAsShipping] = useState(false)
 
   function toggleBillingMatchShipping() {
@@ -35,7 +41,60 @@ const BillingView: FunctionComponent = () => {
   }
 
   function saveProfile() {
+    const userInfoValidationKeys = Object.keys(userInfoValidation)
+    const paymentInfoValidationKeys = Object.keys(paymentInfoValidation)
+    let areThereErrors = false
 
+    // Shipping Details
+    if (billingSameAsShipping === false) {
+      userInfoValidationKeys.map((key: UserInfoKey) => { // look through every key to get test through all the functions
+        const validationFncs = userInfoValidation[key]
+        const inputVal = store.shipping[key]
+        console.log(key, inputVal)
+        let error = ''
+        for (const fnc of validationFncs) {
+          error = fnc(inputVal)
+          // if it fails the is required validation, it break and dont run the rest until there's an input there
+          if (error.length > 0) break
+        }
+        if (error.length > 0) areThereErrors = true
+        dispatchErrors({ type: SET_INPUT_FIELD_ERRORS_SHIPPING, key, value: error })
+      })
+    }
+
+    // Billing Details
+    userInfoValidationKeys.map((key: UserInfoKey) => {
+      const validationFncs = userInfoValidation[key]
+      const inputVal = store.billing[key]
+      console.log(key, inputVal)
+      let error = ''
+      for (const fnc of validationFncs) {
+        error = fnc(inputVal)
+        if (error.length > 0) break
+      }
+      if (error.length > 0) areThereErrors = true
+      dispatchErrors({ type: SET_INPUT_FIELD_ERRORS_BILLING, key, value: error })
+    })
+
+    // Payment Details
+    paymentInfoValidationKeys.map((key: PaymentInfoKey) => {
+      const validationFncs = paymentInfoValidation[key]
+      const inputVal = store.payment[key]
+      console.log(key, inputVal)
+      let error = ''
+      for (const fnc of validationFncs) {
+        error = fnc(inputVal)
+        if (error.length > 0) break
+      }
+      if (error.length > 0) areThereErrors = true
+      dispatchErrors({ type: SET_INPUT_FIELD_ERRORS_PAYMENT, key, value: error })
+    })
+
+    // If there's no errors, save profile
+    if (areThereErrors === false) {
+      dispatchErrors({ type: CLEAR_INPUT_FIELD_ERRORS_ALL })
+      // save profile
+    }
   }
 
   return (
@@ -45,6 +104,7 @@ const BillingView: FunctionComponent = () => {
       <PaymentDetails paymentDetails={store.payment} dispatch={dispatch} />
       <input type='checkbox' name='shipToBilling' checked={billingSameAsShipping} onChange={toggleBillingMatchShipping} />
       <label>Ship to Billing</label>
+      <button onClick={saveProfile}>Submit</button>
     </div>
   )
 }

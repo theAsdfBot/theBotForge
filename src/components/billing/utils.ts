@@ -1,7 +1,7 @@
 import validator from "validator"
 
-export const isRequired = (fieldName: string, text: string): string => {
-  return text.length >= 1 ? '' : `Ops! Looks like you didn't enter your ${fieldName}`
+export const isRequired = (text: string): string => {
+  return text.length >= 1 ? '' : 'This is required!!'
 }
 
 export const validatePhone = (text: string): string => {
@@ -28,7 +28,32 @@ export const validateEmail = (text: string): string => {
   return validator.isEmail(text) ? '' : 'Ops! Looks like there\'s something wrong with your email'
 }
 
-export const userInfoValidation = {
+export type UserProfileValidationType = {
+  firstName: Array<(text: string) => string>,
+  lastName: Array<(text: string) => string>,
+  address1: Array<(text: string) => string>,
+  city: Array<(text: string) => string>,
+  state: Array<(text: string) => string>,
+  country: Array<(text: string) => string>,
+  zipCode: Array<(text: string) => string>,
+  phone: Array<(text: string) => string>,
+}
+
+export type UserInfoKey = keyof UserProfileValidationType
+
+export type PaymentInfoValidationType = {
+  nameOnCard: Array<(text: string) => string>,
+  cardNumber: Array<(text: string) => string>,
+  expirationMonth: Array<(text: string) => string>,
+  expirationYear: Array<(text: string) => string>,
+  securityCode: Array<(text: string) => string>,
+  email: Array<(text: string) => string>,
+  profileName: Array<(text: string) => string>
+}
+
+export type PaymentInfoKey = keyof PaymentInfoValidationType
+
+export const userInfoValidation: UserProfileValidationType = {
   firstName: [isRequired],
   lastName: [isRequired],
   address1: [isRequired],
@@ -39,7 +64,7 @@ export const userInfoValidation = {
   phone: [isRequired, validatePhone]
 }
 
-export const paymentInfoValidation = {
+export const paymentInfoValidation: PaymentInfoValidationType = {
   nameOnCard: [isRequired],
   cardNumber: [isRequired, validateCreditCard],
   expirationMonth: [isRequired, validateExpMonth],

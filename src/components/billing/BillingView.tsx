@@ -15,7 +15,6 @@ import {
   SET_INPUT_FIELD_ERRORS_SHIPPING,
   CLEAR_INPUT_FIELD_ERRORS_ALL
 } from "./store/actions";
-// import { userInfoValidation, paymentInfoValidation } from '@utils/formValidation/billingProfile'
 import {
   userInfoValidation,
   paymentInfoValidation,
@@ -99,9 +98,9 @@ const BillingView: FunctionComponent = () => {
 
   return (
     <div>
-      <BillingDetails billingDetails={store.billing} dispatch={dispatch} />
-      <ShippingDetails shippingDetails={store.shipping} dispatch={dispatch} billingSameAsShipping={billingSameAsShipping} />
-      <PaymentDetails paymentDetails={store.payment} dispatch={dispatch} />
+      <BillingDetails billingDetails={store.billing} errors={inputErrors.billing} dispatch={dispatch} />
+      <ShippingDetails shippingDetails={store.shipping} errors={inputErrors.shipping} dispatch={dispatch} billingSameAsShipping={billingSameAsShipping} />
+      <PaymentDetails paymentDetails={store.payment} errors={inputErrors.payment} dispatch={dispatch} />
       <input type='checkbox' name='shipToBilling' checked={billingSameAsShipping} onChange={toggleBillingMatchShipping} />
       <label>Ship to Billing</label>
       <button onClick={saveProfile}>Submit</button>

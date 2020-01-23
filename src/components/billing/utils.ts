@@ -13,15 +13,16 @@ export const validateCreditCard = (text: string): string => {
 }
 
 export const validateCCSecurityCode = (text: any): string => { // need to be any for type coercion purposes 
-  return text.length <= 4 && text.length >= 3 && typeof (text * 1) === 'number' ? '' : 'Your security code doesn\'t look right'
+  return text.length <= 4 && text.length >= 3 && !isNaN(text * 1)  ? '' : 'Your security code doesn\'t look right'
 }
 
 export const validateExpMonth = (text: any): string => {
-  return text.length <= 2 && text.length > 0 && typeof (text * 1) === 'number' ? '' : 'The month you entered looks invalid'
+  return text.length <= 2 && text.length > 0 && !isNaN(text * 1) ? '' : 'The month you entered looks invalid'
 }
 
 export const validateExpYear = (text: any): string => {
-  return text.length === 4 && typeof (text * 1) === 'number' ? '' : 'The expiration year is invalid'
+  console.log((text * 1) !== NaN)
+  return text.length === 4 && !isNaN(text * 1) ? '' : 'The expiration year is invalid'
 }
 
 export const validateEmail = (text: string): string => {

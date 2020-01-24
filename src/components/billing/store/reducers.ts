@@ -1,13 +1,21 @@
 import {
   Store,
-  StoreAction
+  StoreAction,
 } from '@component_types/billingTypes'
 
 import {
   UPDATE_BILLING_KEY,
   UPDATE_PAYMENT_KEY,
   UPDATE_SHIPPING_KEY,
-  SET_SHIPPING_TO_BILLING
+  SET_SHIPPING_TO_BILLING,
+  SET_INPUT_FIELD_ERRORS_BILLING,
+  SET_INPUT_FIELD_ERRORS_SHIPPING,
+  SET_INPUT_FIELD_ERRORS_PAYMENT,
+  POPULATE_INPUT_FIELD_ERRORS,
+  CLEAR_INPUT_FIELD_ERRORS_BILLING,
+  CLEAR_INPUT_FIELD_ERRORS_PAYMENT,
+  CLEAR_INPUT_FIELD_ERRORS_SHIPPING,
+  CLEAR_INPUT_FIELD_ERRORS_ALL,
 } from './actions'
 
 export const initialStore: Store = {
@@ -44,7 +52,7 @@ export const initialStore: Store = {
   }
 }
 
-export const reducer = (state: Store = initialStore, payload: StoreAction): Store => {
+export const billingProfileReducer = (state: Store = initialStore, payload: StoreAction): Store => {
   switch (payload.type) {
     case SET_SHIPPING_TO_BILLING:
       return {
@@ -75,6 +83,74 @@ export const reducer = (state: Store = initialStore, payload: StoreAction): Stor
         payment: {
           ...state.payment,
           [payload.key]: payload.value
+        }
+      }
+    default:
+      return state
+  }
+}
+
+export const inputFieldErrorsReducer = (state: Store = initialStore, payload: StoreAction): Store => {
+  switch (payload.type) {
+    case SET_INPUT_FIELD_ERRORS_BILLING:
+      return {
+        ...state,
+        billing: {
+          ...state.billing,
+          [payload.key]: payload.value
+        }
+      }
+    case SET_INPUT_FIELD_ERRORS_SHIPPING:
+      return {
+        ...state,
+        shipping: {
+          ...state.shipping,
+          [payload.key]: payload.value
+        }
+      }
+    case SET_INPUT_FIELD_ERRORS_PAYMENT:
+      return {
+        ...state,
+        payment: {
+          ...state.payment,
+          [payload.key]: payload.value
+        }
+      }
+    case POPULATE_INPUT_FIELD_ERRORS:
+    case CLEAR_INPUT_FIELD_ERRORS_BILLING:
+      return {
+        ...state,
+        billing: {
+          ...state.billing,
+          [payload.key]: ''
+        }
+      }
+    case CLEAR_INPUT_FIELD_ERRORS_SHIPPING:
+      return {
+        ...state,
+        shipping: {
+          ...state.shipping,
+          [payload.key]: ''
+        }
+      }
+    case CLEAR_INPUT_FIELD_ERRORS_PAYMENT:
+      return {
+        ...state,
+        payment: {
+          ...state.payment,
+          [payload.key]: ''
+        }
+      }
+    case CLEAR_INPUT_FIELD_ERRORS_ALL:
+      return {
+        billing: {
+          ...initialStore.billing
+        },
+        shipping: {
+          ...initialStore.shipping
+        },
+        payment: {
+          ...initialStore.payment
         }
       }
     default:

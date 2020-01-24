@@ -28,22 +28,22 @@ const ShippingDetails: FunctionComponent<ShippingDetailsProps> = ({ shippingDeta
     <div>
       <h4>Shipping Details</h4>
       <input disabled={billingSameAsShipping} type='text' name='firstName' placeholder='First Name' value={firstName} onChange={onChange} />
-      {errors.firstName && !billingSameAsShipping ? <span>{errors.firstName}</span> : null}
+      <span>{errors.firstName && !billingSameAsShipping ? errors.firstName : ''}</span>
       <input disabled={billingSameAsShipping} type='text' name='lastName' placeholder='Last Name' value={lastName} onChange={onChange} />
-      {errors.lastName && !billingSameAsShipping ? <span>{errors.lastName}</span> : null}
+      <span>{errors.lastName && !billingSameAsShipping ? errors.lastName : ''}</span>
       <input disabled={billingSameAsShipping} type='text' name='address1' placeholder='Address 1' value={address1} onChange={onChange} />
-      {errors.address1 && !billingSameAsShipping ? <span>{errors.address1}</span> : null}
+      <span>{errors.address1 && !billingSameAsShipping ? errors.address1 : ''}</span>
       <input disabled={billingSameAsShipping} type='text' name='address2' placeholder='Address 2' value={address2} onChange={onChange} />
       <input disabled={billingSameAsShipping} type='text' name='city' placeholder='City' value={city} onChange={onChange} />
-      {errors.city && !billingSameAsShipping ? <span>{errors.city}</span> : null}
+      <span>{errors.city && !billingSameAsShipping ? errors.city : ''}</span>
       <input disabled={billingSameAsShipping} type='text' name='state' placeholder='State' value={state} onChange={onChange} />
-      {errors.state && !billingSameAsShipping ? <span>{errors.state}</span> : null}
+      <span>{errors.state && !billingSameAsShipping ? errors.state : ''}</span>
       <input disabled={billingSameAsShipping} type='text' name='country' placeholder='Country' value={country} onChange={onChange} />
-      {errors.country && !billingSameAsShipping ? <span>{errors.country}</span> : null}
+      <span>{errors.country && !billingSameAsShipping ? errors.country : ''}</span>
       <input disabled={billingSameAsShipping} type='text' name='zipCode' placeholder='Zip Code' value={zipCode} onChange={onChange} />
-      {errors.zipCode && !billingSameAsShipping ? <span>{errors.zipCode}</span> : null}
+      <span>{errors.zipCode && !billingSameAsShipping ? errors.zipCode : ''}</span>
       <input disabled={billingSameAsShipping} type='text' name='phone' placeholder='Phone' value={phone} onChange={onChange} />
-      {errors.phone && !billingSameAsShipping ? <span>{errors.phone}</span> : null}
+      <span>{errors.phone && !billingSameAsShipping ? errors.phone : ''}</span>
     </div>
   );
 };

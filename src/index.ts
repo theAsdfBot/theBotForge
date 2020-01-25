@@ -13,16 +13,18 @@ let mainWindow: Electron.BrowserWindow;
 const createWindow = () => {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    height: 1000,
-    width: 1500,
-    resizable: false
+    height: 750,
+    width: 1200,
+    resizable: false,
+    titleBarStyle: 'hiddenInset',
+    frame: false
   });
 
   // and load the index.html of the app.
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 
   // Emitted when the window is closed.
   mainWindow.on('closed', () => {

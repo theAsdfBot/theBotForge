@@ -4,7 +4,7 @@ import BillingView from './billing/BillingView'
 
 const Main = () => {
   return (
-    <div className='container'>
+    <div>
       <BillingView />
     </div>
   )

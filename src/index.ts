@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, screen } from 'electron';
 declare const MAIN_WINDOW_WEBPACK_ENTRY: any;
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -12,9 +12,13 @@ let mainWindow: Electron.BrowserWindow;
 
 const createWindow = () => {
   // Create the browser window.
+  // const { width, height } = screen.getPrimaryDisplay().workAreaSize
+  // console.log(width)
+  // console.log(height)
+
   mainWindow = new BrowserWindow({
-    height: 750,
-    width: 1200,
+    height: 800,
+    width: 1500,
     resizable: false,
     titleBarStyle: 'hiddenInset',
     frame: false
@@ -24,7 +28,7 @@ const createWindow = () => {
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools();
 
   // Emitted when the window is closed.
   mainWindow.on('closed', () => {

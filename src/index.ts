@@ -20,7 +20,7 @@ const createWindow = () => {
     height: 800,
     width: 1500,
     resizable: false,
-    titleBarStyle: 'hiddenInset',
+    titleBarStyle: 'customButtonsOnHover',
     frame: false
   });
 

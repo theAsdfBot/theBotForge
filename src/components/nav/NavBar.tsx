@@ -1,16 +1,44 @@
 import React, { FunctionComponent } from 'react'
-import { Link } from 'react-router-dom'
 
-const NavBar: FunctionComponent = (props) => {
-  console.log(props)
+import NavItem from './NavItem'
+import Logo from './Logo'
+
+const tabs = [
+  {
+    displayName: 'Dashboard',
+    path: '/'
+  },
+  {
+    displayName: 'Create Tasks',
+    path: '/create-tasks'
+  },
+  {
+    displayName: 'Proxies',
+    path: '/proxies'
+  },
+  {
+    displayName: 'Accounts',
+    path: '/accounts'
+  },
+  {
+    displayName: 'Billing',
+    path: '/billing-profiles'
+  },
+  {
+    displayName: 'Settings',
+    path: '/settings'
+  }
+]
+
+const NavBar: FunctionComponent = () => {
   return (
-    <nav className='flex-row-container'>
-      <Link to='/'>Dashboard</Link>
-      <Link to='/create-tasks'>Create Tasks</Link>
-      <Link to='/proxies'>Proxies</Link>
-      <Link to='/accounts'>Accounts</Link>
-      <Link to='/billing-profiles'>Billing</Link>
-      <Link to='/settings'>Settings</Link>
+    <nav className='nav-container py-8 draggable bg-gray-900'>
+      <Logo />
+      <div className='nav-item-container pr-8'>
+        {tabs.map(tab => {
+          return <NavItem displayName={tab.displayName} path={tab.path} />
+        })}
+      </div>
     </nav>
   )
 }

@@ -23,6 +23,18 @@
   flex-direction: row;
 }
 
+.nav-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.nav-container > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
 /* used to determine which element can be used to drag it around the screen */
 .draggable {
   -webkit-app-region: drag;

@@ -4,19 +4,15 @@
 
 @tailwind utilities;
 
-/* body {
+/* 
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  margin: auto;
-  max-width: 38rem;
-  padding: 2rem;
-} */
+*/
 
-/* html {
-  background-color: #7f5a83;
-  background: linear-gradient(315deg, #7f5a83 0%, #0d324d 74%);
-  background-repeat: no-repeat;
-  min-height: 100%;
-} */
+body {
+  height: 100vh;
+  background-color: #141414;
+  color: white;
+}
 
 .flex-row-container {
   display: flex;
@@ -24,16 +20,33 @@
 }
 
 .nav-container {
-  display: flex;
-  flex-direction: row;
+  @apply flex-row-container;
   justify-content: space-between;
 }
 
 .nav-container > div {
-  display: flex;
-  flex-direction: row;
+  @apply flex-row-container;
   justify-content: flex-end;
 }
+
+.billing-profile-container {
+  @apply flex-row-container;
+  justify-content: space-evenly;
+  margin-top: 3rem;
+}
+
+.user-info-card {
+  @apply bg-gray-900;
+  min-width: 25%;
+  min-height: 10rem;
+}
+
+.user-info-card > .form-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+}
+
 
 /* used to determine which element can be used to drag it around the screen */
 .draggable {

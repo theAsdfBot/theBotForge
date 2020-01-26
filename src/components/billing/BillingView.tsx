@@ -98,7 +98,7 @@ const BillingView: FunctionComponent = () => {
 
   return (
     <div>
-      <div className='flex-row-container'>
+      <div className='billing-profile-container'>
         <BillingDetails billingDetails={store.billing} errors={inputErrors.billing} dispatch={dispatch} />
         <ShippingDetails shippingDetails={store.shipping} errors={inputErrors.shipping} dispatch={dispatch} billingSameAsShipping={billingSameAsShipping} />
         <PaymentDetails paymentDetails={store.payment} errors={inputErrors.payment} dispatch={dispatch} />

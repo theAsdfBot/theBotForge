@@ -11,8 +11,8 @@ const Main = () => {
       <Router>
         <NavBar />
         <Switch>
-          <Route path='/' exact component={Dashboard} />
-          <Route path='/billing-profiles' component={BillingView} />
+        <Route path='/' component={BillingView} />
+          <Route path='/asdf' exact component={Dashboard} />
         </Switch>
       </Router>
     </div>

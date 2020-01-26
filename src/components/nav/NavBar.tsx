@@ -32,11 +32,11 @@ const tabs = [
 
 const NavBar: FunctionComponent = () => {
   return (
-    <nav className='nav-container py-8 draggable bg-gray-900'>
+    <nav className='nav-container py-4 bg-gray-900 draggable'>
       <Logo />
       <div className='nav-item-container pr-8'>
-        {tabs.map(tab => {
-          return <NavItem displayName={tab.displayName} path={tab.path} />
+        {tabs.map((tab, idx) => {
+          return <NavItem displayName={tab.displayName} path={tab.path} key={idx}/>
         })}
       </div>
     </nav>

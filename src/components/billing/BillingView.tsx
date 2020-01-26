@@ -98,9 +98,11 @@ const BillingView: FunctionComponent = () => {
 
   return (
     <div>
-      <BillingDetails billingDetails={store.billing} errors={inputErrors.billing} dispatch={dispatch} />
-      <ShippingDetails shippingDetails={store.shipping} errors={inputErrors.shipping} dispatch={dispatch} billingSameAsShipping={billingSameAsShipping} />
-      <PaymentDetails paymentDetails={store.payment} errors={inputErrors.payment} dispatch={dispatch} />
+      <div className='flex-row-container'>
+        <BillingDetails billingDetails={store.billing} errors={inputErrors.billing} dispatch={dispatch} />
+        <ShippingDetails shippingDetails={store.shipping} errors={inputErrors.shipping} dispatch={dispatch} billingSameAsShipping={billingSameAsShipping} />
+        <PaymentDetails paymentDetails={store.payment} errors={inputErrors.payment} dispatch={dispatch} />
+      </div>
       <input type='checkbox' name='shipToBilling' checked={billingSameAsShipping} onChange={toggleBillingMatchShipping} />
       <label>Ship to Billing</label>
       <button onClick={saveProfile}>Submit</button>

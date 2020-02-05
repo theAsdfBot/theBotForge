@@ -24,8 +24,10 @@ const BillingDetails: FunctionComponent<BillingDetailsProps> = ({ billingDetails
 
   return (
     <div className='user-info-card'>
-      <h4>Billing Details</h4>
-      <div className='form-container'></div>
+      <div className='heading-container'>
+        <h4>Billing Details</h4>
+      </div>
+      <div className='form-container'>
         <input type='text' name='firstName' placeholder='First Name' value={firstName} onChange={onChange} />
         <span>{errors.firstName || ''}</span>
         <input type='text' name='lastName' placeholder='Last Name' value={lastName} onChange={onChange} />
@@ -43,6 +45,7 @@ const BillingDetails: FunctionComponent<BillingDetailsProps> = ({ billingDetails
         <span>{errors.zipCode || ''}</span>
         <input type='text' name='phone' placeholder='Phone' value={phone} onChange={onChange} />
         <span>{errors.phone || ''}</span>
+      </div>
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import React, { FunctionComponent, useReducer, useState } from 'react'
 
+import ProfileSelector from './profileSelector/ProfileSelector'
 import BillingDetails from './details/BillingDetails'
 import ShippingDetails from './details/ShippingDetails'
 import PaymentDetails from './details/PaymentDetails'
@@ -99,12 +100,11 @@ const BillingView: FunctionComponent = () => {
   return (
     <div>
       <div className='billing-profile-container'>
+        <ProfileSelector />
         <BillingDetails billingDetails={store.billing} errors={inputErrors.billing} dispatch={dispatch} />
-        <ShippingDetails shippingDetails={store.shipping} errors={inputErrors.shipping} dispatch={dispatch} billingSameAsShipping={billingSameAsShipping} />
+        <ShippingDetails shippingDetails={store.shipping} errors={inputErrors.shipping} dispatch={dispatch} billingSameAsShipping={billingSameAsShipping} toggleBillingMatchShipping={toggleBillingMatchShipping} />
         <PaymentDetails paymentDetails={store.payment} errors={inputErrors.payment} dispatch={dispatch} />
       </div>
-      <input type='checkbox' name='shipToBilling' checked={billingSameAsShipping} onChange={toggleBillingMatchShipping} />
-      <label>Ship to Billing</label>
       <button onClick={saveProfile}>Submit</button>
     </div>
   )

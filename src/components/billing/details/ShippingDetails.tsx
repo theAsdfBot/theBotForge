@@ -12,10 +12,11 @@ type ShippingDetailsProps = {
   shippingDetails: UserInfo,
   errors: UserInfo,
   billingSameAsShipping: boolean,
+  toggleBillingMatchShipping: React.Dispatch<StoreAction>,
   dispatch: React.Dispatch<StoreAction>
 }
 
-const ShippingDetails: FunctionComponent<ShippingDetailsProps> = ({ shippingDetails, billingSameAsShipping, dispatch, errors }) => {
+const ShippingDetails: FunctionComponent<ShippingDetailsProps> = ({ shippingDetails, billingSameAsShipping, toggleBillingMatchShipping, dispatch, errors }) => {
   const { firstName, lastName, address1, address2, city, state, country, zipCode, phone } = shippingDetails
 
   const onChange = (e: ChangeEvent<HTMLInputElement>): void => dispatch({
@@ -26,7 +27,9 @@ const ShippingDetails: FunctionComponent<ShippingDetailsProps> = ({ shippingDeta
 
   return (
     <div className='user-info-card'>
-      <h4>Shipping Details</h4>
+      <div className='heading-container'>
+        <h4>Shipping Details</h4>
+      </div>
       <div className='form-container'>
         <input disabled={billingSameAsShipping} type='text' name='firstName' placeholder='First Name' value={firstName} onChange={onChange} />
         <span>{errors.firstName && !billingSameAsShipping ? errors.firstName : ''}</span>
@@ -46,6 +49,8 @@ const ShippingDetails: FunctionComponent<ShippingDetailsProps> = ({ shippingDeta
         <input disabled={billingSameAsShipping} type='text' name='phone' placeholder='Phone' value={phone} onChange={onChange} />
         <span>{errors.phone && !billingSameAsShipping ? errors.phone : ''}</span>
       </div>
+      <input type='checkbox' name='shipToBilling' checked={billingSameAsShipping} onChange={toggleBillingMatchShipping} />
+      <label>Ship to Billing</label>
     </div>
   );
 };

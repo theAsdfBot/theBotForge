@@ -8,7 +8,7 @@ type NavItemProps = {
 
 const NavItem: FunctionComponent<NavItemProps> = ({ displayName, path }) => {
   return (
-    <Link to={path} className='pr-20 text-gray-300 clickable'>{displayName}</Link>
+    <Link to={path} className='clickable'>{displayName}</Link>
   )
 }
 

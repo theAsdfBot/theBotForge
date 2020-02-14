@@ -23,11 +23,11 @@ const BillingDetails: FunctionComponent<BillingDetailsProps> = ({ billingDetails
   })
 
   return (
-    <div className='user-info-card'>
-      <div className='heading-container'>
+    <div>
+      <div>
         <h4>Billing Details</h4>
       </div>
-      <div className='form-container'>
+      <div>
         <input type='text' name='firstName' placeholder='First Name' value={firstName} onChange={onChange} />
         <span>{errors.firstName || ''}</span>
         <input type='text' name='lastName' placeholder='Last Name' value={lastName} onChange={onChange} />

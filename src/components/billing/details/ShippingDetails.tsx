@@ -26,11 +26,11 @@ const ShippingDetails: FunctionComponent<ShippingDetailsProps> = ({ shippingDeta
   })
 
   return (
-    <div className='user-info-card'>
-      <div className='heading-container'>
+    <div>
+      <div>
         <h4>Shipping Details</h4>
       </div>
-      <div className='form-container'>
+      <div>
         <input disabled={billingSameAsShipping} type='text' name='firstName' placeholder='First Name' value={firstName} onChange={onChange} />
         <span>{errors.firstName && !billingSameAsShipping ? errors.firstName : ''}</span>
         <input disabled={billingSameAsShipping} type='text' name='lastName' placeholder='Last Name' value={lastName} onChange={onChange} />

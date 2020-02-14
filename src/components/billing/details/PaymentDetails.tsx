@@ -23,11 +23,11 @@ const PaymentDetails: FunctionComponent<PaymentDetailsProps> = ({ paymentDetails
   })
 
   return (
-    <div className='user-info-card'>
-      <div className='heading-container'>
+    <div>
+      <div>
         <h4>Payment Details</h4>
       </div>
-      <div className='form-container'>
+      <div>
         <input type='text' name='nameOnCard' placeholder='Full Name' value={nameOnCard} onChange={onChange} />
         <span>{errors.nameOnCard || ''}</span>
         <input type='text' name='cardNumber' placeholder='Credit Card Number' value={cardNumber} onChange={onChange} size={16} />

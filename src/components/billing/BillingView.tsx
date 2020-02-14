@@ -99,7 +99,7 @@ const BillingView: FunctionComponent = () => {
 
   return (
     <div>
-      <div className='billing-profile-container'>
+      <div>
         <ProfileSelector />
         <BillingDetails billingDetails={store.billing} errors={inputErrors.billing} dispatch={dispatch} />
         <ShippingDetails shippingDetails={store.shipping} errors={inputErrors.shipping} dispatch={dispatch} billingSameAsShipping={billingSameAsShipping} toggleBillingMatchShipping={toggleBillingMatchShipping} />

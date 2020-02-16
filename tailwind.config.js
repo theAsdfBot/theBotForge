@@ -11,8 +11,9 @@ module.exports = {
     },
     colors: {
       transparent: 'transparent',
-
-      black: '#000',
+      black: {
+        netflix: '#141414'
+      },
       white: '#fff',
 
       gray: {

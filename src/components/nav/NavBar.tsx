@@ -32,9 +32,9 @@ const tabs = [
 
 const NavBar: FunctionComponent = () => {
   return (
-    <nav>
+    <nav className='draggable bg-black-netflix w-screen h-20 relative table'>
       <Logo />
-      <div>
+      <div className='align-middle table-cell'>
         {tabs.map((tab, idx) => {
           return <NavItem displayName={tab.displayName} path={tab.path} key={idx} />
         })}

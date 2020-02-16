@@ -1,9 +1,8 @@
 import React, { FunctionComponent, useReducer, useState } from 'react'
 
 import ProfileSelector from './profileSelector/ProfileSelector'
-import BillingDetails from './details/BillingDetails'
-import ShippingDetails from './details/ShippingDetails'
 import PaymentDetails from './details/PaymentDetails'
+import UserDetails from './details/UserDetails'
 import {
   initialStore,
   billingProfileReducer,
@@ -14,7 +13,9 @@ import {
   SET_INPUT_FIELD_ERRORS_BILLING,
   SET_INPUT_FIELD_ERRORS_PAYMENT,
   SET_INPUT_FIELD_ERRORS_SHIPPING,
-  CLEAR_INPUT_FIELD_ERRORS_ALL
+  CLEAR_INPUT_FIELD_ERRORS_ALL,
+  UPDATE_BILLING_KEY,
+  UPDATE_SHIPPING_KEY
 } from "./store/actions"
 import {
   userInfoValidation,
@@ -99,10 +100,10 @@ const BillingView: FunctionComponent = () => {
 
   return (
     <div>
-      <div>
+      <div className='flex flex-row'>
         <ProfileSelector />
-        <BillingDetails billingDetails={store.billing} errors={inputErrors.billing} dispatch={dispatch} />
-        <ShippingDetails shippingDetails={store.shipping} errors={inputErrors.shipping} dispatch={dispatch} billingSameAsShipping={billingSameAsShipping} toggleBillingMatchShipping={toggleBillingMatchShipping} />
+        <UserDetails name='Billing View' userDetails={store.billing} errors={inputErrors.billing} dispatch={dispatch} onChangeActionType={UPDATE_BILLING_KEY} />
+        <UserDetails name='Shipping View' userDetails={store.shipping} errors={inputErrors.shipping} dispatch={dispatch} onChangeActionType={UPDATE_SHIPPING_KEY} billingSameAsShipping={billingSameAsShipping} />
         <PaymentDetails paymentDetails={store.payment} errors={inputErrors.payment} dispatch={dispatch} />
       </div>
       <button onClick={saveProfile}>Submit</button>

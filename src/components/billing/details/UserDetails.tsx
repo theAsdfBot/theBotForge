@@ -7,17 +7,20 @@ import {
   UPDATE_BILLING_KEY
 } from '../store/actions'
 
-type BillingDetailsProps = {
-  billingDetails: UserInfo,
+type UserDetailsProps = {
+  userDetails: UserInfo,
+  name: string,
   errors: UserInfo,
+  onChangeActionType: string,
+  billingSameAsShipping?: boolean, // ? makes billingSameAsShipping an optional prop
   dispatch: React.Dispatch<StoreAction>
 }
 
-const BillingDetails: FunctionComponent<BillingDetailsProps> = ({ billingDetails, dispatch, errors }) => {
-  const { firstName, lastName, address1, address2, city, state, country, zipCode, phone } = billingDetails
+const UserDetails: FunctionComponent<UserDetailsProps> = ({ userDetails, name, dispatch, errors, billingSameAsShipping, onChangeActionType }) => {
+  const { firstName, lastName, address1, address2, city, state, country, zipCode, phone } = userDetails
 
   const onChange = (e: ChangeEvent<HTMLInputElement>): void => dispatch({
-    type: UPDATE_BILLING_KEY,
+    type: onChangeActionType,
     key: e.target.name,
     value: e.target.value
   })
@@ -25,9 +28,9 @@ const BillingDetails: FunctionComponent<BillingDetailsProps> = ({ billingDetails
   return (
     <div>
       <div>
-        <h4>Billing Details</h4>
+        <h4>{name}</h4>
       </div>
-      <div>
+      <div className='flex flex-col'>
         <input type='text' name='firstName' placeholder='First Name' value={firstName} onChange={onChange} />
         <span>{errors.firstName || ''}</span>
         <input type='text' name='lastName' placeholder='Last Name' value={lastName} onChange={onChange} />
@@ -50,4 +53,4 @@ const BillingDetails: FunctionComponent<BillingDetailsProps> = ({ billingDetails
   );
 };
 
-export default BillingDetails
+export default UserDetails

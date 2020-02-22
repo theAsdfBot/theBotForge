@@ -6,6 +6,7 @@ import {
 import {
   UPDATE_BILLING_KEY
 } from '../store/actions'
+import FormInput from '../../common/FormInput'
 
 type UserDetailsProps = {
   userDetails: UserInfo,
@@ -31,23 +32,15 @@ const UserDetails: FunctionComponent<UserDetailsProps> = ({ userDetails, name, d
         <h4>{name}</h4>
       </div>
       <div className='flex flex-col'>
-        <input type='text' name='firstName' placeholder='First Name' value={firstName} onChange={onChange} />
-        <span>{errors.firstName || ''}</span>
-        <input type='text' name='lastName' placeholder='Last Name' value={lastName} onChange={onChange} />
-        <span>{errors.lastName || ''}</span>
-        <input type='text' name='address1' placeholder='Address 1' value={address1} onChange={onChange} />
-        <span>{errors.address1 || ''}</span>
-        <input type='text' name='address2' placeholder='Address 2' value={address2} onChange={onChange} />
-        <input type='text' name='city' placeholder='City' value={city} onChange={onChange} />
-        <span>{errors.city || ''}</span>
-        <input type='text' name='state' placeholder='State' value={state} onChange={onChange} />
-        <span>{errors.state || ''}</span>
-        <input type='text' name='country' placeholder='Country' value={country} onChange={onChange} />
-        <span>{errors.country || ''}</span>
-        <input type='text' name='zipCode' placeholder='Zip Code' value={zipCode} onChange={onChange} />
-        <span>{errors.zipCode || ''}</span>
-        <input type='text' name='phone' placeholder='Phone' value={phone} onChange={onChange} />
-        <span>{errors.phone || ''}</span>
+        <FormInput type='text' name='firstName' placeholder='First Name' value={firstName} onChange={onChange} error={errors.firstName} />
+        <FormInput type='text' name='lastName' placeholder='Last Name' value={lastName} onChange={onChange} error={errors.lastName} />
+        <FormInput type='text' name='address1' placeholder='Address 1' value={address1} onChange={onChange} error={errors.address1} />
+        <FormInput type='text' name='address2' placeholder='Address 2' value={address2} onChange={onChange} />
+        <FormInput type='text' name='city' placeholder='City' value={city} onChange={onChange} error={errors.city} />
+        <FormInput type='text' name='state' placeholder='State' value={state} onChange={onChange} error={errors.state} />
+        <FormInput type='text' name='country' placeholder='Country' value={country} onChange={onChange} error={errors.country} />
+        <FormInput type='text' name='zipCode' placeholder='Zip Code' value={zipCode} onChange={onChange} error={errors.zipCode} />
+        <FormInput type='text' name='phone' placeholder='Phone' value={phone} onChange={onChange} error={errors.phone} />
       </div>
     </div>
   );

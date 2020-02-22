@@ -6,6 +6,7 @@ import {
 import {
   UPDATE_PAYMENT_KEY
 } from '../store/actions'
+import FormInput from '../../common/FormInput'
 
 type PaymentDetailsProps = {
   paymentDetails: PaymentInfo,
@@ -29,22 +30,15 @@ const PaymentDetails: FunctionComponent<PaymentDetailsProps> = ({ paymentDetails
       </div>
       <div className='flex flex-col'>
         {/*TODO: ENUM here for card type*/}
-        <input type='text' name='cardNumber' placeholder='Credit Card Number' value={cardNumber} onChange={onChange} size={16} />
-        <span>{errors.cardNumber || ''}</span>
+        <FormInput type='text' name='cardNumber' placeholder='Credit Card Number' value={cardNumber} onChange={onChange} maxLength={4} error={errors.cardNumber} />
         <div>
-          <input type='text' name='expirationMonth' placeholder='Card Expiration Month' value={expirationMonth} onChange={onChange} size={4} />
-          <span>{errors.expirationMonth || ''}</span>
-          <input type='text' name='expirationYear' placeholder='Card Expiration Year' value={expirationYear} onChange={onChange} size={4} />
-          <span>{errors.expirationYear || ''}</span>
-          <input type='text' name='securityCode' placeholder='Security Code' value={securityCode} onChange={onChange} size={4} />
-          <span>{errors.securityCode || ''}</span>
+          <FormInput type='text' name='expirationMonth' placeholder='Month' value={expirationMonth} onChange={onChange} maxLength={4} error={errors.expirationMonth} />
+          <FormInput type='text' name='expirationYear' placeholder='Year' value={expirationYear} onChange={onChange} maxLength={4} error={errors.expirationYear} />
+          <FormInput type='text' name='securityCode' placeholder='CVV' value={securityCode} onChange={onChange} maxLength={4} error={errors.securityCode} />
         </div>
-        <input type='text' name='nameOnCard' placeholder='Full Name' value={nameOnCard} onChange={onChange} />
-        <span>{errors.nameOnCard || ''}</span>
-        <input type='text' name='email' placeholder='email' value={email} onChange={onChange} />
-        <span>{errors.email || ''}</span>
-        <input type='text' name='profileName' placeholder='Profile Name' value={profileName} onChange={onChange} />
-        <span>{errors.profileName || ''}</span>
+        <FormInput type='text' name='nameOnCard' placeholder='Full Name' value={nameOnCard} onChange={onChange} error={errors.nameOnCard} />
+        <FormInput type='text' name='email' placeholder='email' value={email} onChange={onChange} error={errors.email} />
+        <FormInput type='text' name='profileName' placeholder='Profile Name' value={profileName} onChange={onChange} error={errors.profileName} />
       </div>
     </div>
   )

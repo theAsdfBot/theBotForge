@@ -6,17 +6,27 @@ type FormTextProps = {
   name: string,
   placeholder: string,
   value: string,
-  maxLength?: number,
   disabled?: boolean
   error?: string,
-  classes?: string,
-  // classes (additional classes that modifies the default classes should we need to?)
+  maxLength?: number,
+  size?: number,
+  classes?: string,// classes (additional classes that modifies adds onto the default classes (maybe more margin or padding)?)
 }
 
-const FormText: FunctionComponent<FormTextProps> = ({ type, name, placeholder, value, onChange, maxLength, disabled, error, classes }) => {
+const FormText: FunctionComponent<FormTextProps> = ({ type, name, placeholder, value, disabled, error, onChange, maxLength, size, classes }) => {
   return (
     <Fragment>
-      <input className={classes} type={type} name={name} placeholder={placeholder} value={value} onChange={onChange} maxLength={maxLength} disabled={disabled} />
+      <input
+        className={`border border-solid border-gray-400 rounded ${classes}`}
+        type={type}
+        name={name}
+        placeholder={placeholder}
+        value={value}
+        disabled={disabled}
+        onChange={onChange}
+        maxLength={maxLength}
+        size={size}
+      />
       <span>{error ? error : ''}</span>
     </Fragment>
   )
@@ -24,8 +34,9 @@ const FormText: FunctionComponent<FormTextProps> = ({ type, name, placeholder, v
 
 FormText.defaultProps = {
   maxLength: 20,
+  size: 20,
   disabled: false,
-  classes: 'border border-solid border-gray-400',
+  classes: '',
   error: ''
 } as Partial<FormTextProps>
 

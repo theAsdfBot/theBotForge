@@ -7,11 +7,12 @@ import Dashboard from './dashboard/Dashboard'
 
 const Main = () => {
   return (
-    <div>
+    <div className='w-screen h-screen'>
       <Router>
         <NavBar />
+        <hr />
         <Switch>
-        <Route path='/' component={BillingView} />
+          <Route path='/' component={BillingView} />
           <Route path='/asdf' exact component={Dashboard} />
         </Switch>
       </Router>

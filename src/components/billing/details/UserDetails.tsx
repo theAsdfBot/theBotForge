@@ -26,7 +26,7 @@ const UserDetails: FunctionComponent<UserDetailsProps> = ({ userDetails, name, d
   })
 
   return (
-    <div>
+    <div className='w-1/4'>
       <div>
         <h4>{name}</h4>
       </div>

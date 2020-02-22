@@ -99,14 +99,16 @@ const BillingView: FunctionComponent = () => {
   }
 
   return (
-    <div>
+    <div className='mt-8'>
       <div className='flex flex-row'>
         <ProfileSelector />
         <UserDetails name='Billing View' userDetails={store.billing} errors={inputErrors.billing} dispatch={dispatch} onChangeActionType={UPDATE_BILLING_KEY} />
         <UserDetails name='Shipping View' userDetails={store.shipping} errors={inputErrors.shipping} dispatch={dispatch} onChangeActionType={UPDATE_SHIPPING_KEY} billingSameAsShipping={billingSameAsShipping} />
-        <PaymentDetails paymentDetails={store.payment} errors={inputErrors.payment} dispatch={dispatch} />
+        <div className='w-1/3'>
+          <PaymentDetails paymentDetails={store.payment} errors={inputErrors.payment} dispatch={dispatch} />
+          <button onClick={saveProfile}>Submit</button>
+        </div>
       </div>
-      <button onClick={saveProfile}>Submit</button>
     </div>
   )
 }

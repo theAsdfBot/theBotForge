@@ -17,7 +17,7 @@ const FormText: FunctionComponent<FormTextProps> = ({ type, name, placeholder, v
   return (
     <Fragment>
       <input
-        className={`border border-solid border-gray-400 rounded px-2 py-2 ${classes}`}
+        className={`border border-solid ${error ? 'border-red-logo' : `border-gray-400`} bg-black-netflix rounded px-2 py-2 text-white ${classes}`}
         type={type}
         name={name}
         placeholder={placeholder}
@@ -27,13 +27,13 @@ const FormText: FunctionComponent<FormTextProps> = ({ type, name, placeholder, v
         maxLength={maxLength}
         size={size}
       />
-      <span>{error ? error : ''}</span>
+      {/* error? <InputError error={error}/> */}
     </Fragment>
   )
 }
 
 FormText.defaultProps = {
-  maxLength: 20,
+  maxLength: 50,
   size: 20,
   disabled: false,
   classes: '',

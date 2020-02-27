@@ -3,13 +3,16 @@
 @tailwind components;
 
 .btn {
-  @apply rounded-lg py-2 px-4;
+  @apply rounded-full py-2 px-4;
 }
 
 .btn-gray {
   @apply bg-gray-500 text-white;
 }
 
+input::placeholder {
+  color: '#A8A2A2'
+}
 /* used to determine which element can be used to drag it around the screen */
 .draggable {
   -webkit-app-region: drag;

@@ -7,10 +7,10 @@ import Dashboard from './dashboard/Dashboard'
 
 const Main = () => {
   return (
-    <div className='w-screen h-screen'>
+    <div className='w-screen h-screen bg-black-netflix'>
       <Router>
         <NavBar />
-        <hr />
+        <hr className='bg-gray-400' />
         <Switch>
           <Route path='/' component={BillingView} />
           <Route path='/asdf' exact component={Dashboard} />

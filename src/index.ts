@@ -17,7 +17,7 @@ const createWindow = () => {
   // console.log(height)
 
   mainWindow = new BrowserWindow({
-    height: 800,
+    height: 750,
     width: 1500,
     resizable: false,
     titleBarStyle: 'customButtonsOnHover',

@@ -108,17 +108,17 @@ const BillingView: FunctionComponent = () => {
         <div className='w-80 mx-6'>
           <PaymentDetails paymentDetails={store.payment} errors={inputErrors.payment} dispatch={dispatch} />
           <div className='flex justify-center mt-6'>
-            <AppButton onClick={saveProfile} btnName='Save' classes='btn-gray mr-8' />
-            <AppButton onClick={() => console.log('Delete the currrent profile')} btnName='Delete' classes='btn-gray' />
+            <AppButton onClick={saveProfile} btnName='Save' classes='btn-gray mr-8 w-20' />
+            <AppButton onClick={() => console.log('Delete the currrent profile')} btnName='Delete' classes='btn-gray w-20' />
           </div>
           <div className='flex justify-center mt-4'>
-            <AppButton onClick={() => console.log('Reset/Clear profile button goes here')} btnName='Reset' classes='btn-gray mx-0 my-auto' />
+            <AppButton onClick={() => console.log('Reset/Clear profile button goes here')} btnName='Reset' classes='btn-gray mx-0 my-auto w-20' />
           </div>
         </div>
       </div>
-      <div className='mt-8 flex justify-center'>
-        <AppButton onClick={() => console.log('import profiles')} btnName='Import' classes='btn-gray mr-8' />
-        <AppButton onClick={() => console.log('export profiles')} btnName='Export' classes='btn-gray' />
+      <div className='mt-12 flex justify-center'>
+        <AppButton onClick={() => console.log('import profiles')} btnName='Import' classes='btn-gray mr-8 w-20' />
+        <AppButton onClick={() => console.log('export profiles')} btnName='Export' classes='btn-gray w-20' />
       </div>
     </div>
   )

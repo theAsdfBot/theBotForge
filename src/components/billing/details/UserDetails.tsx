@@ -3,9 +3,6 @@ import {
   UserInfo,
   StoreAction
 } from '@component_types/billingTypes'
-import {
-  UPDATE_BILLING_KEY
-} from '../store/actions'
 import FormInput from '../../common/FormInput'
 
 type UserDetailsProps = {

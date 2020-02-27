@@ -2,7 +2,13 @@
 
 @tailwind components;
 
-@tailwind utilities;
+.btn {
+  @apply rounded-lg py-2 px-4;
+}
+
+.btn-gray {
+  @apply bg-gray-500 text-white;
+}
 
 /* used to determine which element can be used to drag it around the screen */
 .draggable {
@@ -13,3 +19,4 @@
   -webkit-app-region: no-drag;
 }
 
+@tailwind utilities;

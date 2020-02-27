@@ -17,7 +17,7 @@ const FormText: FunctionComponent<FormTextProps> = ({ type, name, placeholder, v
   return (
     <Fragment>
       <input
-        className={`border border-solid border-gray-400 rounded ${classes}`}
+        className={`border border-solid border-gray-400 rounded px-2 py-2 ${classes}`}
         type={type}
         name={name}
         placeholder={placeholder}

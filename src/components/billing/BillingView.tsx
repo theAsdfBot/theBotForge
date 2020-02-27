@@ -3,6 +3,7 @@ import React, { FunctionComponent, useReducer, useState } from 'react'
 import ProfileSelector from './profileSelector/ProfileSelector'
 import PaymentDetails from './details/PaymentDetails'
 import UserDetails from './details/UserDetails'
+import AppButton from '../common/AppButton'
 import {
   initialStore,
   billingProfileReducer,
@@ -100,14 +101,24 @@ const BillingView: FunctionComponent = () => {
 
   return (
     <div className='mt-8'>
-      <div className='flex flex-row'>
+      <div className='flex'>
         <ProfileSelector />
         <UserDetails name='Billing View' userDetails={store.billing} errors={inputErrors.billing} dispatch={dispatch} onChangeActionType={UPDATE_BILLING_KEY} />
         <UserDetails name='Shipping View' userDetails={store.shipping} errors={inputErrors.shipping} dispatch={dispatch} onChangeActionType={UPDATE_SHIPPING_KEY} billingSameAsShipping={billingSameAsShipping} />
         <div className='w-80 mx-6'>
           <PaymentDetails paymentDetails={store.payment} errors={inputErrors.payment} dispatch={dispatch} />
-          <button onClick={saveProfile}>Submit</button>
+          <div className='flex justify-center mt-6'>
+            <AppButton onClick={saveProfile} btnName='Save' classes='btn-gray mr-8' />
+            <AppButton onClick={() => console.log('Delete the currrent profile')} btnName='Delete' classes='btn-gray' />
+          </div>
+          <div className='flex justify-center mt-4'>
+            <AppButton onClick={() => console.log('Reset/Clear profile button goes here')} btnName='Reset' classes='btn-gray mx-0 my-auto' />
+          </div>
         </div>
+      </div>
+      <div className='mt-8 flex justify-center'>
+        <AppButton onClick={() => console.log('import profiles')} btnName='Import' classes='btn-gray mr-8' />
+        <AppButton onClick={() => console.log('export profiles')} btnName='Export' classes='btn-gray' />
       </div>
     </div>
   )

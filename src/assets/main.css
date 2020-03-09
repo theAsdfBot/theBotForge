@@ -7,11 +7,18 @@
 }
 
 .btn-gray {
-  @apply bg-gray-500 text-white;
+  @apply bg-gray-850 text-white;
 }
 
 input::placeholder {
   color: '#A8A2A2'
+}
+
+.overlay {
+  height: 450px;
+  width: inherit;
+  z-index: 10;
+  @apply absolute opacity-25 bg-black-netflix rounded;
 }
 /* used to determine which element can be used to drag it around the screen */
 .draggable {

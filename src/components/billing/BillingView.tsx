@@ -11,12 +11,11 @@ import {
 } from './store/reducers'
 import {
   SET_SHIPPING_TO_BILLING,
-  SET_INPUT_FIELD_ERRORS_BILLING,
-  SET_INPUT_FIELD_ERRORS_PAYMENT,
-  SET_INPUT_FIELD_ERRORS_SHIPPING,
   CLEAR_INPUT_FIELD_ERRORS_ALL,
+  CLEAR_BILLING_PROFILE,
   UPDATE_BILLING_KEY,
-  UPDATE_SHIPPING_KEY
+  UPDATE_SHIPPING_KEY,
+  POPULATE_INPUT_FIELD_ERRORS
 } from "./store/actions"
 import {
   userInfoValidation,
@@ -41,15 +40,21 @@ const BillingView: FunctionComponent = () => {
       setBillingSameAsShipping(true)
     }
   }
+  console.log(billingSameAsShipping)
 
   function saveProfile() {
     const userInfoValidationKeys = Object.keys(userInfoValidation)
     const paymentInfoValidationKeys = Object.keys(paymentInfoValidation)
     let areThereErrors = false
+    const errorObj = {
+      billing: { ...initialStore.billing },
+      shipping: { ...initialStore.shipping },
+      payment: { ...initialStore.payment }
+    }
 
-    // Shipping Details
+    // Shipping Profile
     if (billingSameAsShipping === false) {
-      userInfoValidationKeys.map((key: UserInfoKey) => { // look through every key to get test through all the functions
+      userInfoValidationKeys.map((key: UserInfoKey) => {
         const validationFncs = userInfoValidation[key]
         const inputVal = store.shipping[key]
         console.log(key, inputVal)
@@ -59,12 +64,14 @@ const BillingView: FunctionComponent = () => {
           // if it fails the is required validation, it break and dont run the rest until there's an input there
           if (error.length > 0) break
         }
-        if (error.length > 0) areThereErrors = true
-        dispatchErrors({ type: SET_INPUT_FIELD_ERRORS_SHIPPING, key, value: error })
+        if (error.length > 0) {
+          errorObj.shipping[key] = error
+          areThereErrors = true
+        }
       })
     }
 
-    // Billing Details
+    // Billing Profile
     userInfoValidationKeys.map((key: UserInfoKey) => {
       const validationFncs = userInfoValidation[key]
       const inputVal = store.billing[key]
@@ -74,11 +81,12 @@ const BillingView: FunctionComponent = () => {
         error = fnc(inputVal)
         if (error.length > 0) break
       }
-      if (error.length > 0) areThereErrors = true
-      dispatchErrors({ type: SET_INPUT_FIELD_ERRORS_BILLING, key, value: error })
+      if (error.length > 0) {
+        errorObj.billing[key] = error
+        areThereErrors = true
+      }
     })
 
-    // Payment Details
     paymentInfoValidationKeys.map((key: PaymentInfoKey) => {
       const validationFncs = paymentInfoValidation[key]
       const inputVal = store.payment[key]
@@ -88,15 +96,25 @@ const BillingView: FunctionComponent = () => {
         error = fnc(inputVal)
         if (error.length > 0) break
       }
-      if (error.length > 0) areThereErrors = true
-      dispatchErrors({ type: SET_INPUT_FIELD_ERRORS_PAYMENT, key, value: error })
+      if (error.length > 0) {
+        errorObj.payment[key] = error
+        areThereErrors = true
+      }
     })
-
+    console.log(errorObj)
+    console.log(areThereErrors)
     // If there's no errors, save profile
     if (areThereErrors === false) {
       dispatchErrors({ type: CLEAR_INPUT_FIELD_ERRORS_ALL })
       // save profile
+    } else {
+      dispatchErrors({ type: POPULATE_INPUT_FIELD_ERRORS, value: errorObj })
     }
+  }
+
+  const resetProfile = () => {
+    dispatch({ type: CLEAR_BILLING_PROFILE })
+    dispatchErrors({ type: CLEAR_INPUT_FIELD_ERRORS_ALL })
   }
 
   return (
@@ -104,7 +122,13 @@ const BillingView: FunctionComponent = () => {
       <div className='flex'>
         <ProfileSelector />
         <UserDetails name='Billing View' userDetails={store.billing} errors={inputErrors.billing} dispatch={dispatch} onChangeActionType={UPDATE_BILLING_KEY} />
-        <UserDetails name='Shipping View' userDetails={store.shipping} errors={inputErrors.shipping} dispatch={dispatch} onChangeActionType={UPDATE_SHIPPING_KEY} billingSameAsShipping={billingSameAsShipping} />
+        <div>
+          <UserDetails name='Shipping View' userDetails={store.shipping} errors={inputErrors.shipping} dispatch={dispatch} onChangeActionType={UPDATE_SHIPPING_KEY} billingSameAsShipping={billingSameAsShipping} />
+          <div>
+            <input className='ml-8 mr-1' type='checkbox' name='Same as Billing Address' onChange={toggleBillingMatchShipping} />
+            <label className='text-white'>Same as Billing Address</label>
+          </div>
+        </div>
         <div className='w-80 mx-6'>
           <PaymentDetails paymentDetails={store.payment} errors={inputErrors.payment} dispatch={dispatch} />
           <div className='flex justify-center mt-6'>
@@ -112,7 +136,7 @@ const BillingView: FunctionComponent = () => {
             <AppButton onClick={() => console.log('Delete the currrent profile')} btnName='Delete' classes='btn-gray w-20' />
           </div>
           <div className='flex justify-center mt-4'>
-            <AppButton onClick={() => console.log('Reset/Clear profile button goes here')} btnName='Reset' classes='btn-gray mx-0 my-auto w-20' />
+            <AppButton onClick={resetProfile} btnName='Reset' classes='btn-gray mx-0 my-auto w-20' />
           </div>
         </div>
       </div>

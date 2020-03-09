@@ -4,6 +4,7 @@ import {
   StoreAction
 } from '@component_types/billingTypes'
 import FormInput from '../../common/FormInput'
+import Overlay from '../../common/Overlay'
 
 type UserDetailsProps = {
   userDetails: UserInfo,
@@ -25,9 +26,10 @@ const UserDetails: FunctionComponent<UserDetailsProps> = ({ userDetails, name, d
 
   return (
     <div className='w-80 mx-6'>
-      <div className='bg-gray-500 text-center text-xl w-2/3 mb-4'>
+      <div className='bg-gray-850 text-center text-xl w-2/3 mb-2'>
         <h4 className='text-white'>{name}</h4>
       </div>
+      {billingSameAsShipping ? <Overlay /> : null}
       <div className='flex flex-col'>
         <FormInput type='text' name='firstName' placeholder='First Name' value={firstName} onChange={onChange} error={errors.firstName} classes={'my-1'} />
         <FormInput type='text' name='lastName' placeholder='Last Name' value={lastName} onChange={onChange} error={errors.lastName} classes={'my-1'} />

@@ -10,7 +10,7 @@ const Main = () => {
     <div className='w-screen h-screen bg-black-netflix'>
       <Router>
         <NavBar />
-        <hr className='bg-gray-400' />
+        <hr className='border-gray-850' />
         <Switch>
           <Route path='/' component={BillingView} />
           <Route path='/asdf' exact component={Dashboard} />

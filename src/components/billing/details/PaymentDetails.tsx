@@ -25,7 +25,7 @@ const PaymentDetails: FunctionComponent<PaymentDetailsProps> = ({ paymentDetails
 
   return (
     <div>
-      <div className='bg-gray-500 text-center text-xl w-2/3 mb-4'>
+      <div className='bg-gray-850 text-center text-xl w-2/3 mb-2'>
         <h4 className='text-white'>Payment Details</h4>
       </div>
       <div className='flex flex-col'>

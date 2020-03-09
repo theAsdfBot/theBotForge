@@ -16,6 +16,8 @@ import {
   CLEAR_INPUT_FIELD_ERRORS_PAYMENT,
   CLEAR_INPUT_FIELD_ERRORS_SHIPPING,
   CLEAR_INPUT_FIELD_ERRORS_ALL,
+  POPULATE_BILLING_PROFILE,
+  CLEAR_BILLING_PROFILE
 } from './actions'
 
 export const initialStore: Store = {
@@ -52,13 +54,13 @@ export const initialStore: Store = {
   }
 }
 
-export const billingProfileReducer = (state: Store = initialStore, payload: StoreAction): Store => {
+export const billingProfileReducer = (state: Store = initialStore, payload: any): Store => { // setting to any so bulk actions can be done
   switch (payload.type) {
     case SET_SHIPPING_TO_BILLING:
       return {
         ...state,
         shipping: {
-          ...state.billing
+          ...initialStore.shipping
         }
       }
     case UPDATE_BILLING_KEY:
@@ -85,12 +87,18 @@ export const billingProfileReducer = (state: Store = initialStore, payload: Stor
           [payload.key]: payload.value
         }
       }
+    case POPULATE_BILLING_PROFILE:
+      return {
+        ...payload.value
+      }
+    case CLEAR_BILLING_PROFILE:
+      return initialStore
     default:
       return state
   }
 }
 
-export const inputFieldErrorsReducer = (state: Store = initialStore, payload: StoreAction): Store => {
+export const inputFieldErrorsReducer = (state: Store = initialStore, payload: any): Store => {
   switch (payload.type) {
     case SET_INPUT_FIELD_ERRORS_BILLING:
       return {
@@ -116,7 +124,6 @@ export const inputFieldErrorsReducer = (state: Store = initialStore, payload: St
           [payload.key]: payload.value
         }
       }
-    case POPULATE_INPUT_FIELD_ERRORS:
     case CLEAR_INPUT_FIELD_ERRORS_BILLING:
       return {
         ...state,
@@ -152,6 +159,10 @@ export const inputFieldErrorsReducer = (state: Store = initialStore, payload: St
         payment: {
           ...initialStore.payment
         }
+      }
+    case POPULATE_INPUT_FIELD_ERRORS:
+      return {
+        ...payload.value
       }
     default:
       return state

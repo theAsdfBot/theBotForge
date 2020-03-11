@@ -23,6 +23,7 @@ export interface PaymentInfo {
 }
 
 export type BillingProfile = {
+  id: string,
   billing: UserInfo,
   shipping: UserInfo,
   payment: PaymentInfo

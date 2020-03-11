@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react'
 import {
   PaymentInfo,
   StoreAction
-} from '@component_types/billingTypes'
+} from '@typesTS/component/billingTypes'
 import {
   UPDATE_PAYMENT_KEY
 } from '../store/actions'

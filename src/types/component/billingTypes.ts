@@ -22,7 +22,7 @@ export interface PaymentInfo {
   [index: string]: string
 }
 
-export type Store = {
+export type BillingProfile = {
   billing: UserInfo,
   shipping: UserInfo,
   payment: PaymentInfo

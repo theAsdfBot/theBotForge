@@ -15,12 +15,12 @@
       "*": [
         "node_modules/*"
       ],
-      "@component_types/*": [
-        "src/types/component/*"
+      "@typesTS/*": [
+        "src/types/*"
       ]
     }
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
   ]
 }

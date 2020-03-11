@@ -2,7 +2,7 @@ import React, { FunctionComponent, ChangeEvent } from 'react'
 import {
   UserInfo,
   StoreAction
-} from '@component_types/billingTypes'
+} from '@typesTS/component/billingTypes'
 import FormInput from '../../common/FormInput'
 import Overlay from '../../common/Overlay'
 

@@ -1,7 +1,7 @@
 import {
-  Store,
+  BillingProfile,
   StoreAction,
-} from '@component_types/billingTypes'
+} from '@typesTS/component/billingTypes'
 
 import {
   UPDATE_BILLING_KEY,
@@ -20,7 +20,7 @@ import {
   CLEAR_BILLING_PROFILE
 } from './actions'
 
-export const initialStore: Store = {
+export const initialStore: BillingProfile = {
   billing: {
     firstName: '',
     lastName: '',
@@ -54,7 +54,7 @@ export const initialStore: Store = {
   }
 }
 
-export const billingProfileReducer = (state: Store = initialStore, payload: any): Store => { // setting to any so bulk actions can be done
+export const billingProfileReducer = (state: BillingProfile = initialStore, payload: any): BillingProfile => { // setting to any so bulk actions can be done
   switch (payload.type) {
     case SET_SHIPPING_TO_BILLING:
       return {
@@ -98,7 +98,7 @@ export const billingProfileReducer = (state: Store = initialStore, payload: any)
   }
 }
 
-export const inputFieldErrorsReducer = (state: Store = initialStore, payload: any): Store => {
+export const inputFieldErrorsReducer = (state: BillingProfile = initialStore, payload: any): BillingProfile => {
   switch (payload.type) {
     case SET_INPUT_FIELD_ERRORS_BILLING:
       return {

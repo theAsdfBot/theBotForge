@@ -7,12 +7,12 @@ const creditCards = [
   '5555555555554444'
 ]
 
-const generateBillingProfiles = (amount: number) => {
+const generateBillingProfiles = (amount: number = 10) => {
   const billingProfiles = []
 
   for (let i = 0; i < amount; i++) {
-    const firstName = faker.firstName()
-    const lastName = faker.lastName()
+    const firstName = faker.name.firstName()
+    const lastName = faker.name.lastName()
     const userInfo = {
       firstName,
       lastName,
@@ -31,7 +31,7 @@ const generateBillingProfiles = (amount: number) => {
       expirationYear: '24',
       securityCode: '342',
       email: faker.internet.email(),
-      profileName: faker.internet.userInfo(),
+      profileName: faker.internet.userName(),
     }
     const billingProfile = {
       billing: userInfo,

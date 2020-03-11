@@ -1,4 +1,4 @@
-import { BillingProfile } from '@typesTS/component/billingTypes'
+import { BillingProfile } from '@typesTS/billingTypes'
 
 // action types
 export const FETCH_PROFILES = 'FETCH_PROFILES'

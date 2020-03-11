@@ -1,7 +1,5 @@
-import {
-  BillingProfile,
-  StoreAction,
-} from '@typesTS/component/billingTypes'
+import { BillingProfile } from '@typesTS/billingTypes'
+import { StoreAction } from './types'
 
 import {
   UPDATE_BILLING_KEY,
@@ -21,6 +19,7 @@ import {
 } from './actions'
 
 export const initialStore: BillingProfile = {
+  id: '',
   billing: {
     firstName: '',
     lastName: '',
@@ -150,6 +149,7 @@ export const inputFieldErrorsReducer = (state: BillingProfile = initialStore, pa
       }
     case CLEAR_INPUT_FIELD_ERRORS_ALL:
       return {
+        id: initialStore.id,
         billing: {
           ...initialStore.billing
         },

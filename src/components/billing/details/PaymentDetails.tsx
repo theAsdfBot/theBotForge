@@ -1,11 +1,9 @@
 import React, { FunctionComponent } from 'react'
-import {
-  PaymentInfo,
-  StoreAction
-} from '@typesTS/component/billingTypes'
-import {
-  UPDATE_PAYMENT_KEY
-} from '../store/actions'
+
+import { PaymentInfo } from '@typesTS/billingTypes'
+import { StoreAction } from '../store/types'
+import { UPDATE_PAYMENT_KEY } from '../store/actions'
+
 import FormInput from '../../common/FormInput'
 
 type PaymentDetailsProps = {

@@ -1,8 +1,6 @@
 import React, { FunctionComponent, ChangeEvent } from 'react'
-import {
-  UserInfo,
-  StoreAction
-} from '@typesTS/component/billingTypes'
+import { UserInfo } from '@typesTS/billingTypes'
+import { StoreAction } from '../store/types'
 import FormInput from '../../common/FormInput'
 import Overlay from '../../common/Overlay'
 

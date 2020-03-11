@@ -28,14 +28,3 @@ export type BillingProfile = {
   shipping: UserInfo,
   payment: PaymentInfo
 }
-
-export interface StoreBaseAction {
-  type: string
-}
-
-export interface StoreUpdate extends StoreBaseAction {
-  key?: string,
-  value?: string
-}
-
-export type StoreAction = StoreUpdate

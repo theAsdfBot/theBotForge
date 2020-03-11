@@ -1,6 +1,6 @@
 import { Action, ActionCreator, Dispatch } from 'redux'
 import { FETCH_PROFILES, UPDATE_PROFILE, CREATE_PROFILE, DELETE_PROFILE } from './types'
-import { BillingProfile } from '@typesTS/component/billingTypes'
+import { BillingProfile } from '@typesTS/billingTypes'
 
 // action creators
 export const fetchProfiles: ActionCreator<Action> = (payload: BillingProfile[]) => ({

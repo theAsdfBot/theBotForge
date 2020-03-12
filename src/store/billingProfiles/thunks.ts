@@ -5,16 +5,16 @@ import { RootState } from '../index'
 import { BillingProfile } from '@typesTS/billingTypes'
 import generateBillingProfiles from '../../mockData/billingProfiles'
 import {
-  fetchProfiles,
+  populateProfiles,
   updateProfile,
   createProfile,
   deleteProfile
 } from './actions'
 
-export const loadingProfiles = (): ThunkAction<void, RootState, unknown, Action<string>> => { // Action<string> where string is the type of the key:value property of 'type'
+export const fetchProfiles = (): ThunkAction<void, RootState, unknown, Action<string>> => { // Action<string> where string is the type of the key:value property of 'type'
   return async dispatch => {
     const payload = generateBillingProfiles()
-    dispatch(fetchProfiles(payload))
+    dispatch(populateProfiles(payload))
   }
 }
 

@@ -6,12 +6,12 @@ import NavBar from './nav/NavBar'
 import BillingView from './billing/BillingView'
 import Dashboard from './dashboard/Dashboard'
 
-import { loadingProfiles } from '../store/billingProfiles/thunks'
+import { fetchProfiles } from '../store/billingProfiles/thunks'
 
 const Main = () => {
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(loadingProfiles())
+    dispatch(fetchProfiles())
   }, [])
 
   return (

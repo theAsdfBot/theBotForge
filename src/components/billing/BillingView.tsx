@@ -120,7 +120,12 @@ const BillingView: FunctionComponent = () => {
   return (
     <div className='mt-8'>
       <div className='flex'>
-        <ProfileSelector />
+        <div className='ml-12 mr-8'>
+          <ProfileSelector />
+          <div className='mt-4 flex justify-center align-center'>
+            <AppButton onClick={() => console.log('allow edit to current profile')} btnName='Edit' classes='btn-gray w-20' />
+          </div>
+        </div>
         <UserDetails name='Billing View' userDetails={store.billing} errors={inputErrors.billing} dispatch={dispatch} onChangeActionType={UPDATE_BILLING_KEY} />
         <div>
           <UserDetails name='Shipping View' userDetails={store.shipping} errors={inputErrors.shipping} dispatch={dispatch} onChangeActionType={UPDATE_SHIPPING_KEY} billingSameAsShipping={billingSameAsShipping} />

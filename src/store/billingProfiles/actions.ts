@@ -1,5 +1,5 @@
 import { Action, ActionCreator } from 'redux'
-import { FETCH_PROFILES, UPDATE_PROFILE, CREATE_PROFILE, DELETE_PROFILE } from './types'
+import { FETCH_PROFILES, UPDATE_PROFILE, CREATE_PROFILE, DELETE_PROFILE, CHANGE_PROFILE } from './types'
 import { BillingProfile } from '@typesTS/billingTypes'
 
 // action creators
@@ -21,4 +21,9 @@ export const createProfile: ActionCreator<Action> = (payload: BillingProfile) =>
 export const deleteProfile: ActionCreator<Action> = (payload: string) => ({
   type: DELETE_PROFILE,
   id: payload
+})
+
+export const changeProfile: ActionCreator<Action> = (newId: string) => ({
+  type: CHANGE_PROFILE,
+  newId
 })

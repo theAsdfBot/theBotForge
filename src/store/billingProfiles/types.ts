@@ -5,6 +5,7 @@ export const FETCH_PROFILES = 'FETCH_PROFILES'
 export const UPDATE_PROFILE = 'UPDATE_PROFILE'
 export const CREATE_PROFILE = 'CREATE_PROFILE'
 export const DELETE_PROFILE = 'DELETE_PROFILE'
+export const CHANGE_PROFILE = 'CHANGE_PROFILE'
 
 interface FetchBillingProfileActionTypes {
   type: typeof FETCH_PROFILES,
@@ -21,9 +22,14 @@ interface DeleteProfileActionType {
   id: string
 }
 
-export type BillingProfileActionTypes = FetchBillingProfileActionTypes | UpdateProfileActionType | DeleteProfileActionType
+interface ChangeProfileActionType {
+  type: typeof CHANGE_PROFILE,
+  newId: string
+}
+
+export type BillingProfileActionTypes = FetchBillingProfileActionTypes | UpdateProfileActionType | DeleteProfileActionType | ChangeProfileActionType
 
 export type BillingProfileState = {
   billingProfiles: BillingProfile[],
-  currentIdx: number
+  currentId: string
 }

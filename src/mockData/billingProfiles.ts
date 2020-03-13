@@ -1,4 +1,5 @@
-const faker = require('faker')
+import faker from 'faker'
+import { v4 as uuidv4 } from 'uuid'
 
 // Stripe testing credit cards
 const creditCards = [
@@ -34,6 +35,7 @@ const generateBillingProfiles = (amount: number = 10) => {
       profileName: faker.internet.userName(),
     }
     const billingProfile = {
+      id: uuidv4(),
       billing: userInfo,
       shipping: userInfo,
       payment: paymentInfo

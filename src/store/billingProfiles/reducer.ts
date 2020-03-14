@@ -1,7 +1,7 @@
 import { BillingProfileActionTypes, BillingProfileState, FETCH_PROFILES, UPDATE_PROFILE, CREATE_PROFILE, DELETE_PROFILE, CHANGE_PROFILE } from './types'
 
 const initialState: BillingProfileState = {
-  billingProfiles: [],
+  profiles: [],
   currentId: ''
 }
 
@@ -10,12 +10,12 @@ const billingProfilesReducer = (state = initialState, action: BillingProfileActi
     case FETCH_PROFILES:
       return {
         currentId: action.payload.length > 0 ? action.payload[0].id : '',
-        billingProfiles: action.payload
+        profiles: action.payload
       }
     case UPDATE_PROFILE:
       return {
         ...state,
-        billingProfiles: state.billingProfiles.reduce((newArr, profile) => { // TODO: REFACTOR
+        profiles: state.profiles.reduce((newArr, profile) => { // TODO: REFACTOR
           if (profile.id === action.payload.id) {
             newArr.push(action.payload)
           } else {
@@ -27,13 +27,13 @@ const billingProfilesReducer = (state = initialState, action: BillingProfileActi
     case CREATE_PROFILE:
       return {
         currentId: action.payload.id, // it'll default to the newly created profile
-        billingProfiles: [action.payload, ...state.billingProfiles]
+        profiles: [action.payload, ...state.profiles]
       }
     case DELETE_PROFILE:
-      const filteredBillingProfiles = state.billingProfiles.filter(profiles => profiles.id !== action.id)
+      const filteredBillingProfiles = state.profiles.filter(profile => profile.id !== action.id)
       return {
         currentId: filteredBillingProfiles.length > 0 ? filteredBillingProfiles[filteredBillingProfiles.length - 1].id : '',
-        billingProfiles: filteredBillingProfiles
+        profiles: filteredBillingProfiles
       }
     case CHANGE_PROFILE:
       return {

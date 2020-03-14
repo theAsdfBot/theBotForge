@@ -5,7 +5,7 @@ export const isRequired = (text: string): string => {
 }
 
 export const validatePhone = (text: string): string => {
-  return validator.isMobilePhone(text) ? '' : 'That doesn\'t look like a phone number'
+  return validator.isMobilePhone(text) ? '' : 'That doesn\'t look like a phone number' // fails for certain phone number formats
 }
 
 export const validateCreditCard = (text: string): string => {

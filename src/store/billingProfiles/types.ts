@@ -30,6 +30,6 @@ interface ChangeProfileActionType {
 export type BillingProfileActionTypes = FetchBillingProfileActionTypes | UpdateProfileActionType | DeleteProfileActionType | ChangeProfileActionType
 
 export type BillingProfileState = {
-  billingProfiles: BillingProfile[],
+  profiles: BillingProfile[],
   currentId: string
 }

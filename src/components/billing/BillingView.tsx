@@ -1,4 +1,5 @@
-import React, { FunctionComponent, useReducer, useState } from 'react'
+import React, { FunctionComponent, useReducer, useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 
 import ProfileSelector from './profileSelector/ProfileSelector'
 import PaymentDetails from './details/PaymentDetails'
@@ -15,7 +16,8 @@ import {
   CLEAR_BILLING_PROFILE,
   UPDATE_BILLING_KEY,
   UPDATE_SHIPPING_KEY,
-  POPULATE_INPUT_FIELD_ERRORS
+  POPULATE_INPUT_FIELD_ERRORS,
+  POPULATE_BILLING_PROFILE
 } from "./store/actions"
 import {
   userInfoValidation,
@@ -23,11 +25,24 @@ import {
   UserInfoKey,
   PaymentInfoKey
 } from './utils'
+import { RootState } from '../../store'
 
 const BillingView: FunctionComponent = () => {
   const [store, dispatch] = useReducer(billingProfileReducer, initialStore)
   const [inputErrors, dispatchErrors] = useReducer(inputFieldErrorsReducer, initialStore)
   const [billingSameAsShipping, setBillingSameAsShipping] = useState(false)
+
+  const currentProfie = useSelector((state: RootState) => {
+    const { billingProfiles } = state
+    console.log(billingProfiles.profiles.find(profile => profile.id === billingProfiles.currentId))
+    return billingProfiles.profiles.find(profile => profile.id === billingProfiles.currentId)
+  }) || store
+  useEffect(() => { // need to figure out how to do componentDidUpdate with hooks
+    console.log(currentProfie)
+    dispatch({
+      type: POPULATE_BILLING_PROFILE, value: currentProfie
+    })
+  }, [])
 
   function toggleBillingMatchShipping() {
     const previousValue = billingSameAsShipping
@@ -40,7 +55,7 @@ const BillingView: FunctionComponent = () => {
       setBillingSameAsShipping(true)
     }
   }
-  console.log(billingSameAsShipping)
+
 
   function saveProfile() {
     const userInfoValidationKeys = Object.keys(userInfoValidation)

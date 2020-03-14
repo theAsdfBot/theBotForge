@@ -23,7 +23,7 @@ const generateBillingProfiles = (amount: number = 10) => {
       state: faker.address.state(),
       country: faker.address.country(),
       zipCode: faker.address.zipCode(),
-      phone: faker.phone.phoneNumber(),
+      phone: faker.phone.phoneNumberFormat(0)
     }
     const paymentInfo = {
       nameOnCard: `${firstName} ${lastName}`,

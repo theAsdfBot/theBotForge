@@ -32,17 +32,19 @@ const BillingView: FunctionComponent = () => {
   const [inputErrors, dispatchErrors] = useReducer(inputFieldErrorsReducer, initialStore)
   const [billingSameAsShipping, setBillingSameAsShipping] = useState(false)
 
-  const currentProfie = useSelector((state: RootState) => {
+  const currentProfileData = useSelector((state: RootState) => {
     const { billingProfiles } = state
-    console.log(billingProfiles.profiles.find(profile => profile.id === billingProfiles.currentId))
-    return billingProfiles.profiles.find(profile => profile.id === billingProfiles.currentId)
-  }) || store
-  useEffect(() => { // need to figure out how to do componentDidUpdate with hooks
-    console.log(currentProfie)
+    return {
+      profile: billingProfiles.profiles.find(profile => profile.id === billingProfiles.currentId) || store,
+      currentId: billingProfiles.currentId
+    }
+  })
+
+  useEffect(() => {
     dispatch({
-      type: POPULATE_BILLING_PROFILE, value: currentProfie
+      type: POPULATE_BILLING_PROFILE, value: currentProfileData.profile
     })
-  }, [])
+  }, [currentProfileData.currentId])
 
   function toggleBillingMatchShipping() {
     const previousValue = billingSameAsShipping

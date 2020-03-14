@@ -4,8 +4,9 @@ import { useSelector } from 'react-redux'
 import ProfileInstance from './ProfileInstance'
 import { RootState } from '../../../store'
 
+// TODO: Style the scrollbar for when we have more than 10 profiles
 const ProfileSelector: FunctionComponent = () => {
-  const { profiles, currentId } = useSelector((state: RootState) => state.billingProfiles) // currentId is the id of the profile we are currently on
+  const { profiles, currentId } = useSelector((state: RootState) => state.billingProfiles)
   return (
     <div className='w-64 h-96 border border-solid border-gray-400'>
       <div className='bg-gray-850 text-center text-xl w-full'>

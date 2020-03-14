@@ -13,7 +13,7 @@ import {
 
 export const fetchProfiles = (): ThunkAction<void, RootState, unknown, Action<string>> => { // Action<string> where string is the type of the key:value property of 'type'
   return async dispatch => {
-    const payload = generateBillingProfiles(13)
+    const payload = generateBillingProfiles()
     dispatch(populateProfiles(payload))
   }
 }

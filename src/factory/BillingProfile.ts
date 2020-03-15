@@ -37,7 +37,7 @@ const template = {
 }
 
 const BillingProfileFactory = (): BillingProfile => {
-  return {
+  return { // will definitely use lodash's deepCopy later on if we do bring in the library
     ...template,
     billing: {
       ...template.billing

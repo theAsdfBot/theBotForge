@@ -1,5 +1,6 @@
 import { BillingProfile } from '@typesTS/billingTypes'
 import { StoreAction } from './types'
+import BillingProfileFactory from '../../../factory/BillingProfile'
 
 import {
   UPDATE_BILLING_KEY,
@@ -18,48 +19,18 @@ import {
   CLEAR_BILLING_PROFILE
 } from './actions'
 
-export const initialStore: BillingProfile = {
-  id: '',
-  billing: {
-    firstName: '',
-    lastName: '',
-    address1: '',
-    address2: '',
-    city: '',
-    state: '',
-    country: '',
-    zipCode: '',
-    phone: '',
-  },
-  shipping: {
-    firstName: '',
-    lastName: '',
-    address1: '',
-    address2: '',
-    city: '',
-    state: '',
-    country: '',
-    zipCode: '',
-    phone: '',
-  },
-  payment: {
-    nameOnCard: '',
-    cardNumber: '',
-    expirationMonth: '',
-    expirationYear: '',
-    securityCode: '',
-    email: '',
-    profileName: '',
-  }
-}
+const emptyBillingProfile = BillingProfileFactory()
+export const initialBillingStore: BillingProfile = emptyBillingProfile
+export const initialInputErrorStore: Partial<BillingProfile> = emptyBillingProfile
 
-export const billingProfileReducer = (state: BillingProfile = initialStore, payload: any): BillingProfile => { // setting to any so bulk actions can be done
+export const billingProfileReducer = (state: BillingProfile = initialBillingStore, payload: any): BillingProfile => { // setting to any so bulk actions can be done
   switch (payload.type) {
     case SET_SHIPPING_TO_BILLING:
       return {
         ...state,
+        billingSameAsShipping: !state.billingSameAsShipping,
         shipping: {
-          ...initialStore.shipping
+          ...initialBillingStore.shipping
         }
       }
     case UPDATE_BILLING_KEY:
@@ -91,13 +62,13 @@ export const billingProfileReducer = (state: BillingProfile = initialStore, payl
         ...payload.value
       }
     case CLEAR_BILLING_PROFILE:
-      return initialStore
+      return initialBillingStore
     default:
       return state
   }
 }
 
-export const inputFieldErrorsReducer = (state: BillingProfile = initialStore, payload: any): BillingProfile => {
+export const inputFieldErrorsReducer = (state: Partial<BillingProfile> = initialInputErrorStore, payload: any): Partial<BillingProfile> => {
   switch (payload.type) {
     case SET_INPUT_FIELD_ERRORS_BILLING:
       return {
@@ -149,15 +120,15 @@ export const inputFieldErrorsReducer = (state: BillingProfile = initialStore, pa
       }
     case CLEAR_INPUT_FIELD_ERRORS_ALL:
       return {
-        id: initialStore.id,
+        id: initialInputErrorStore.id,
         billing: {
-          ...initialStore.billing
+          ...initialInputErrorStore.billing
         },
         shipping: {
-          ...initialStore.shipping
+          ...initialInputErrorStore.shipping
         },
         payment: {
-          ...initialStore.payment
+          ...initialInputErrorStore.payment
         }
       }
     case POPULATE_INPUT_FIELD_ERRORS:

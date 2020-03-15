@@ -17,7 +17,7 @@ const ProfileInstance: FunctionComponent<ProfileInstancePropTypes> = ({ profileN
       style={{ height: '30.8px' }}
       onClick={e => dispatch(changeProfile(profileId))}
     >
-      <div className='text-white text-center'>{profileName}</div>
+      <div className='text-white text-center'>{profileName || 'Unnamed Profile'}</div>
     </div >
   )
 }

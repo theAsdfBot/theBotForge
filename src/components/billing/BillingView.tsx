@@ -1,12 +1,13 @@
 import React, { FunctionComponent, useReducer, useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import ProfileSelector from './profileSelector/ProfileSelector'
 import PaymentDetails from './details/PaymentDetails'
 import UserDetails from './details/UserDetails'
 import AppButton from '../common/AppButton'
 import {
-  initialStore,
+  initialBillingStore,
+  initialInputErrorStore,
   billingProfileReducer,
   inputFieldErrorsReducer
 } from './store/reducers'
@@ -26,11 +27,13 @@ import {
   PaymentInfoKey
 } from './utils'
 import { RootState } from '../../store'
+import { deleteBillingProfile, createBillingProfile, updateBillingProfile } from '../../store/billingProfiles/thunks'
 
 const BillingView: FunctionComponent = () => {
-  const [store, dispatch] = useReducer(billingProfileReducer, initialStore)
-  const [inputErrors, dispatchErrors] = useReducer(inputFieldErrorsReducer, initialStore)
-  const [billingSameAsShipping, setBillingSameAsShipping] = useState(false)
+  const [store, dispatch] = useReducer(billingProfileReducer, initialBillingStore)
+  const [inputErrors, dispatchErrors] = useReducer(inputFieldErrorsReducer, initialInputErrorStore)
+
+  const rootDispatch = useDispatch()
 
   const currentProfileData = useSelector((state: RootState) => {
     const { billingProfiles } = state
@@ -44,18 +47,15 @@ const BillingView: FunctionComponent = () => {
     dispatch({
       type: POPULATE_BILLING_PROFILE, value: currentProfileData.profile
     })
+    dispatchErrors({
+      type: CLEAR_INPUT_FIELD_ERRORS_ALL
+    })
   }, [currentProfileData.currentId])
 
-  function toggleBillingMatchShipping() {
-    const previousValue = billingSameAsShipping
-    if (previousValue) {
-      setBillingSameAsShipping(false)
-    } else {
-      dispatch({
-        type: SET_SHIPPING_TO_BILLING
-      })
-      setBillingSameAsShipping(true)
-    }
+  function toggleBillingMatchShipping() { // need to remove
+    dispatch({
+      type: SET_SHIPPING_TO_BILLING
+    })
   }
 
 
@@ -64,14 +64,14 @@ const BillingView: FunctionComponent = () => {
     const paymentInfoValidationKeys = Object.keys(paymentInfoValidation)
     let areThereErrors = false
     const errorObj = {
-      billing: { ...initialStore.billing },
-      shipping: { ...initialStore.shipping },
-      payment: { ...initialStore.payment }
+      billing: { ...initialInputErrorStore.billing },
+      shipping: { ...initialInputErrorStore.shipping },
+      payment: { ...initialInputErrorStore.payment }
     }
 
     // Shipping Profile
-    if (billingSameAsShipping === false) {
-      userInfoValidationKeys.map((key: UserInfoKey) => {
+    if (store.billingSameAsShipping === false) {
+      userInfoValidationKeys.forEach((key: UserInfoKey) => {
         const validationFncs = userInfoValidation[key]
         const inputVal = store.shipping[key]
         console.log(key, inputVal)
@@ -89,7 +89,7 @@ const BillingView: FunctionComponent = () => {
     }
 
     // Billing Profile
-    userInfoValidationKeys.map((key: UserInfoKey) => {
+    userInfoValidationKeys.forEach((key: UserInfoKey) => {
       const validationFncs = userInfoValidation[key]
       const inputVal = store.billing[key]
       console.log(key, inputVal)
@@ -104,7 +104,7 @@ const BillingView: FunctionComponent = () => {
       }
     })
 
-    paymentInfoValidationKeys.map((key: PaymentInfoKey) => {
+    paymentInfoValidationKeys.forEach((key: PaymentInfoKey) => {
       const validationFncs = paymentInfoValidation[key]
       const inputVal = store.payment[key]
       console.log(key, inputVal)
@@ -123,7 +123,7 @@ const BillingView: FunctionComponent = () => {
     // If there's no errors, save profile
     if (areThereErrors === false) {
       dispatchErrors({ type: CLEAR_INPUT_FIELD_ERRORS_ALL })
-      // save profile
+      rootDispatch(updateBillingProfile(store))
     } else {
       dispatchErrors({ type: POPULATE_INPUT_FIELD_ERRORS, value: errorObj })
     }
@@ -141,11 +141,12 @@ const BillingView: FunctionComponent = () => {
           <ProfileSelector />
           <div className='mt-4 flex justify-center align-center'>
             <AppButton onClick={() => console.log('allow edit to current profile')} btnName='Edit' classes='btn-gray w-20' />
+            <AppButton onClick={() => rootDispatch(createBillingProfile())} btnName='New' classes='btn-gray w-20 ml-6' />
           </div>
         </div>
         <UserDetails name='Billing View' userDetails={store.billing} errors={inputErrors.billing} dispatch={dispatch} onChangeActionType={UPDATE_BILLING_KEY} />
         <div>
-          <UserDetails name='Shipping View' userDetails={store.shipping} errors={inputErrors.shipping} dispatch={dispatch} onChangeActionType={UPDATE_SHIPPING_KEY} billingSameAsShipping={billingSameAsShipping} />
+          <UserDetails name='Shipping View' userDetails={store.shipping} errors={inputErrors.shipping} dispatch={dispatch} onChangeActionType={UPDATE_SHIPPING_KEY} billingSameAsShipping={store.billingSameAsShipping} />
           <div>
             <input className='ml-8 mr-1' type='checkbox' name='Same as Billing Address' onChange={toggleBillingMatchShipping} />
             <label className='text-white'>Same as Billing Address</label>
@@ -155,7 +156,7 @@ const BillingView: FunctionComponent = () => {
           <PaymentDetails paymentDetails={store.payment} errors={inputErrors.payment} dispatch={dispatch} />
           <div className='flex justify-center mt-6'>
             <AppButton onClick={saveProfile} btnName='Save' classes='btn-gray mr-8 w-20' />
-            <AppButton onClick={() => console.log('Delete the currrent profile')} btnName='Delete' classes='btn-gray w-20' />
+            <AppButton onClick={() => rootDispatch(deleteBillingProfile(currentProfileData.currentId))} btnName='Delete' classes='btn-gray w-20' />
           </div>
           <div className='flex justify-center mt-4'>
             <AppButton onClick={resetProfile} btnName='Reset' classes='btn-gray mx-0 my-auto w-20' />

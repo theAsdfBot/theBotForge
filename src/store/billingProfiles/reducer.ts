@@ -32,7 +32,7 @@ const billingProfilesReducer = (state = initialState, action: BillingProfileActi
     case DELETE_PROFILE:
       const filteredBillingProfiles = state.profiles.filter(profile => profile.id !== action.id)
       return {
-        currentId: filteredBillingProfiles.length > 0 ? filteredBillingProfiles[filteredBillingProfiles.length - 1].id : '',
+        currentId: filteredBillingProfiles.length > 0 ? filteredBillingProfiles[0].id : '',
         profiles: filteredBillingProfiles
       }
     case CHANGE_PROFILE:

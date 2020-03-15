@@ -29,7 +29,7 @@ const generateBillingProfiles = (amount: number = 10) => {
       nameOnCard: `${firstName} ${lastName}`,
       cardNumber: creditCards[Math.floor(Math.random() * Math.floor(3))],
       expirationMonth: '12',
-      expirationYear: '24',
+      expirationYear: '2024',
       securityCode: '342',
       email: faker.internet.email(),
       profileName: faker.internet.userName(),

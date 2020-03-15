@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid'
 import { BillingProfile } from '@typesTS/billingTypes'
 
 const template = {
@@ -39,6 +40,7 @@ const template = {
 const BillingProfileFactory = (): BillingProfile => {
   return { // will definitely use lodash's deepCopy later on if we do bring in the library
     ...template,
+    id: uuidv4(),
     billing: {
       ...template.billing
     },

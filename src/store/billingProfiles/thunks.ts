@@ -28,7 +28,6 @@ export const createBillingProfile = (): ThunkAction<void, RootState, unknown, Ac
   return async dispatch => {
     // TODO: add new profile to file
     const newProfile = BillingProfileFactory()
-    newProfile.id = uuidv4()
     dispatch(createProfile(newProfile))
   }
 }

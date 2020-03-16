@@ -12,7 +12,7 @@ interface FetchBillingProfileActionTypes {
   payload: BillingProfile[]
 }
 
-interface UpdateProfileActionType { // signature for both updateProfile & createProfile
+interface CreateProfileActionType { // signature for both updateProfile & createProfile
   type: typeof UPDATE_PROFILE | typeof CREATE_PROFILE,
   payload: BillingProfile
 }
@@ -27,7 +27,7 @@ interface ChangeProfileActionType {
   newId: string
 }
 
-export type BillingProfileActionTypes = FetchBillingProfileActionTypes | UpdateProfileActionType | DeleteProfileActionType | ChangeProfileActionType
+export type BillingProfileActionTypes = FetchBillingProfileActionTypes | CreateProfileActionType | DeleteProfileActionType | ChangeProfileActionType
 
 export type BillingProfileState = {
   profiles: BillingProfile[],

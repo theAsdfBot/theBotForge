@@ -1,4 +1,5 @@
 import { Action, ActionCreator } from 'redux'
+import BillingProfileFactory from '../../factory/BillingProfile'
 import { FETCH_PROFILES, UPDATE_PROFILE, CREATE_PROFILE, DELETE_PROFILE, CHANGE_PROFILE } from './types'
 import { BillingProfile } from '@typesTS/billingTypes'
 
@@ -13,9 +14,9 @@ export const updateProfile: ActionCreator<Action> = (payload: BillingProfile) =>
   payload
 })
 
-export const createProfile: ActionCreator<Action> = (payload: BillingProfile) => ({
+export const createProfile: ActionCreator<Action> = () => ({
   type: CREATE_PROFILE,
-  payload
+  payload: BillingProfileFactory()
 })
 
 export const deleteProfile: ActionCreator<Action> = (payload: string) => ({

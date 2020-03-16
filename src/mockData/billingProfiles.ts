@@ -36,6 +36,7 @@ const generateBillingProfiles = (amount: number = 10) => {
     }
     const billingProfile = {
       id: uuidv4(),
+      billingSameAsShipping: false,
       billing: userInfo,
       shipping: userInfo,
       payment: paymentInfo

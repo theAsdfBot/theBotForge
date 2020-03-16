@@ -1,17 +1,29 @@
 import React, { useEffect } from 'react'
 import { HashRouter as Router, Route, Switch } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+import { ipcRenderer } from 'electron'
 
 import NavBar from './nav/NavBar'
 import BillingView from './billing/BillingView'
 import Dashboard from './dashboard/Dashboard'
 
-import { fetchProfiles } from '../store/billingProfiles/thunks'
+import { emitProfilesFetch } from '../ipcRenderer'
+import { populateProfiles } from '../store/billingProfiles/actions'
 
 const Main = () => {
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(fetchProfiles())
+    // ComponentDidMount setup & fetch
+    ipcRenderer.on('send-billing-profiles', (event, payload) => {
+      dispatch(populateProfiles(payload))
+    })
+    emitProfilesFetch()
+
+    // componentWillUnmount cleanup
+    return function cleanUp() {
+      ipcRenderer.removeListener('sending-billing-profiles', () => console.log('removed listener'))
+    }
+
   }, [])
 
   return (

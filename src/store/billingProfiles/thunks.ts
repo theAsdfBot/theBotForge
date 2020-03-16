@@ -6,24 +6,10 @@ import { BillingProfile } from '@typesTS/billingTypes'
 import BillingProfileFactory from '../../factory/BillingProfile'
 import generateBillingProfiles from '../../mockData/billingProfiles'
 import {
-  populateProfiles,
   updateProfile,
   createProfile,
   deleteProfile
 } from './actions'
-import { emitProfilesFetch } from '../../ipcRenderer/billingProfiles'
-
-export const fetchProfiles = (): ThunkAction<void, RootState, unknown, Action<string>> => { // Action<string> where string is the type of the key:value property of 'type'
-  return async dispatch => {
-    emitProfilesFetch()
-    const payload: any = []
-    if (payload.length === 0) { // if there are no profiles, create one automatically
-      dispatch(createBillingProfile())
-    } else {
-      dispatch(populateProfiles(payload))
-    }
-  }
-}
 
 export const createBillingProfile = (): ThunkAction<void, RootState, unknown, Action<string>> => {
   return async dispatch => {

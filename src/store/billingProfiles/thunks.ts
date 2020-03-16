@@ -1,6 +1,5 @@
 import { ThunkAction, ThunkDispatch } from 'redux-thunk'
 import { Action } from 'redux'
-import { v4 as uuidv4 } from 'uuid'
 
 import { RootState } from '../index'
 import { BillingProfile } from '@typesTS/billingTypes'
@@ -12,10 +11,12 @@ import {
   createProfile,
   deleteProfile
 } from './actions'
+import { emitProfilesFetch } from '../../ipcRenderer/billingProfiles'
 
 export const fetchProfiles = (): ThunkAction<void, RootState, unknown, Action<string>> => { // Action<string> where string is the type of the key:value property of 'type'
   return async dispatch => {
-    const payload = generateBillingProfiles()
+    emitProfilesFetch()
+    const payload: any = []
     if (payload.length === 0) { // if there are no profiles, create one automatically
       dispatch(createBillingProfile())
     } else {

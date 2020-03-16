@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useReducer, useState, useEffect } from 'react'
+import React, { FunctionComponent, useReducer, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import ProfileSelector from './profileSelector/ProfileSelector'
@@ -27,7 +27,7 @@ import {
   PaymentInfoKey
 } from './utils'
 import { RootState } from '../../store'
-import { deleteBillingProfile, createBillingProfile, updateBillingProfile } from '../../store/billingProfiles/thunks'
+import { emitUpdateProfile } from '../../ipcRenderer/eventEmitters'
 
 const BillingView: FunctionComponent = () => {
   const [store, dispatch] = useReducer(billingProfileReducer, initialBillingStore)
@@ -123,7 +123,8 @@ const BillingView: FunctionComponent = () => {
     // If there's no errors, save profile
     if (areThereErrors === false) {
       dispatchErrors({ type: CLEAR_INPUT_FIELD_ERRORS_ALL })
-      rootDispatch(updateBillingProfile(store))
+      emitUpdateProfile(store)
+      // rootDispatch(updateBillingProfile(store))
     } else {
       dispatchErrors({ type: POPULATE_INPUT_FIELD_ERRORS, value: errorObj })
     }
@@ -141,7 +142,7 @@ const BillingView: FunctionComponent = () => {
           <ProfileSelector />
           <div className='mt-4 flex justify-center align-center'>
             <AppButton onClick={() => console.log('allow edit to current profile')} btnName='Edit' classes='btn-gray w-20' />
-            <AppButton onClick={() => rootDispatch(createBillingProfile())} btnName='New' classes='btn-gray w-20 ml-6' />
+            <AppButton onClick={() => 'rootDispatch(createBillingProfile()'} btnName='New' classes='btn-gray w-20 ml-6' />
           </div>
         </div>
         <UserDetails name='Billing View' userDetails={store.billing} errors={inputErrors.billing} dispatch={dispatch} onChangeActionType={UPDATE_BILLING_KEY} />
@@ -156,7 +157,7 @@ const BillingView: FunctionComponent = () => {
           <PaymentDetails paymentDetails={store.payment} errors={inputErrors.payment} dispatch={dispatch} />
           <div className='flex justify-center mt-6'>
             <AppButton onClick={saveProfile} btnName='Save' classes='btn-gray mr-8 w-20' />
-            <AppButton onClick={() => rootDispatch(deleteBillingProfile(currentProfileData.currentId))} btnName='Delete' classes='btn-gray w-20' />
+            <AppButton onClick={() => 'rootDispatch(deleteBillingProfile(currentProfileData.currentId))'} btnName='Delete' classes='btn-gray w-20' />
           </div>
           <div className='flex justify-center mt-4'>
             <AppButton onClick={resetProfile} btnName='Reset' classes='btn-gray mx-0 my-auto w-20' />

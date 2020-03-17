@@ -9,8 +9,8 @@ import Dashboard from './dashboard/Dashboard'
 import { RootState } from '../store'
 import { initiateLoading } from '../store/loading/action'
 
-import { emitProfilesFetch } from '../ipcRenderer/eventEmitters'
-import { setUpListeners, removeListeners } from '../ipcRenderer/eventListeners'
+import { emitStartUpDataRequest } from '../ipcRenderer/eventEmitters'
+import { setUpAppStartUpListeners } from '../ipcRenderer/eventListeners'
 
 const Main = () => {
   const dispatch = useDispatch()
@@ -18,11 +18,9 @@ const Main = () => {
 
   useEffect(() => {
     // componentDidMount 
-    setUpListeners()
+    setUpAppStartUpListeners()
     dispatch(initiateLoading())
-    emitProfilesFetch()
-    // componentWillUnmount
-    return removeListeners
+    emitStartUpDataRequest()
   }, [])
 
   return (

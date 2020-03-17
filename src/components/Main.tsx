@@ -10,7 +10,7 @@ import { RootState } from '../store'
 import { initiateLoading } from '../store/loading/action'
 
 import { emitStartUpDataRequest } from '../ipcRenderer/eventEmitters'
-import { setUpAppStartUpListeners } from '../ipcRenderer/eventListeners'
+import { setUpAppStartUpListeners, setUpOperationIndicators } from '../ipcRenderer/eventListeners'
 
 const Main = () => {
   const dispatch = useDispatch()
@@ -19,6 +19,7 @@ const Main = () => {
   useEffect(() => {
     // componentDidMount 
     setUpAppStartUpListeners()
+    setUpOperationIndicators()
     dispatch(initiateLoading())
     emitStartUpDataRequest()
   }, [])

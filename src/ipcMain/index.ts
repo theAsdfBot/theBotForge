@@ -1,11 +1,11 @@
-import { ipcMain, app } from 'electron'
-import { promises as fsp } from 'fs'
+import { ipcMain } from 'electron'
 
 import { BillingProfile } from '@typesTS/billingTypes'
 
-import { fetchBillingProfiles } from '../fileOperations/billingProfiles'
+import { fetchBillingProfiles, updateBillingProfiles, deleteBillingProfile } from '../fileOperations/billingProfiles'
 
-ipcMain.on('startup-data-request', async event => {
+// listens for this event only once
+ipcMain.once('startup-data-request', async event => {
   const [billingProfileResults] = await Promise.all([fetchBillingProfiles()]) //add other data fetches
 
   const response = {
@@ -13,22 +13,30 @@ ipcMain.on('startup-data-request', async event => {
       ...billingProfileResults
     }
   }
+  console.log(response)
   event.sender.send('startup-data-response', response)
 })
 
-ipcMain.on('update-billing-profile', async (event, payload: BillingProfile) => {
-  try {
-    const appDataPath = app.getPath('userData')
-    const data = await fsp.readFile(`${appDataPath}\\testing\\billingProfiles.json`)
-    let profiles = JSON.parse(data.toString())
-    profiles = profiles.map((profile: BillingProfile) => {
-      if (profile.id === payload.id) return payload
-      return profile
+ipcMain.on('update-billing-profile', (event, payload: BillingProfile) => {
+  return updateBillingProfiles(payload)
+    .then(res => {
+      console.log(res)
+      if (res.success) {
+        event.sender.send('successful-operation')
+      } else {
+        event.sender.send('unsuccessful-operation', res.message)
+      }
     })
-    await fsp.writeFile(appDataPath, JSON.stringify(profiles))
-    event.sender.send('successful-operation')
-  } catch (err) {
-    console.error(err)
-    event.sender.send('bad-operation', err)
-  }
+})
+
+ipcMain.on('delete-billing-profile', (event, id: string) => {
+  return deleteBillingProfile(id)
+    .then(res => {
+      console.log(res)
+      if (res.success) {
+        event.sender.send('successful-operation')
+      } else {
+        event.sender.send('unsuccessful-operation', res.message)
+      }
+    })
 })

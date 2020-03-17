@@ -13,7 +13,7 @@ ipcMain.once('startup-data-request', async event => {
       ...billingProfileResults
     }
   }
-  console.log(response)
+
   event.sender.send('startup-data-response', response)
 })
 

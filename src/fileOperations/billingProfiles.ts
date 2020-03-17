@@ -17,6 +17,7 @@ export const fetchBillingProfiles = () => {
       }
     })
     .catch(err => {
+      console.log(err)
       //TODO: build error handler & ENOENT means file not found / directory not found
       const message = err.code === 'ENOENT' ? 'File not found' : 'unknown err' // leaving it as unknown error for now. Dont want to send the data to frontend
       return { success: false, message }

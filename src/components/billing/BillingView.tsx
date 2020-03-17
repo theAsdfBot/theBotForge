@@ -27,7 +27,7 @@ import {
   PaymentInfoKey
 } from './utils'
 import { RootState } from '../../store'
-import { updateBillingProfile, deleteBillingProfile } from '../../store/billingProfiles/actions'
+import { updateBillingProfile, deleteBillingProfile, createProfile } from '../../store/billingProfiles/actions'
 
 const BillingView: FunctionComponent = () => {
   const [store, dispatch] = useReducer(billingProfileReducer, initialBillingStore)
@@ -140,7 +140,7 @@ const BillingView: FunctionComponent = () => {
           <ProfileSelector />
           <div className='mt-4 flex justify-center align-center'>
             <AppButton onClick={() => console.log('allow edit to current profile')} btnName='Edit' classes='btn-gray w-20' />
-            <AppButton onClick={() => 'rootDispatch(createBillingProfile()'} btnName='New' classes='btn-gray w-20 ml-6' />
+            <AppButton onClick={() => rootDispatch(createProfile())} btnName='New' classes='btn-gray w-20 ml-6' />
           </div>
         </div>
         <UserDetails name='Billing View' userDetails={store.billing} errors={inputErrors.billing} dispatch={dispatch} onChangeActionType={UPDATE_BILLING_KEY} />

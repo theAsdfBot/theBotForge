@@ -18,8 +18,8 @@ const Main = () => {
 
   useEffect(() => {
     // componentDidMount 
-    setUpAppStartUpListeners()
-    setUpOperationIndicators()
+    setUpAppStartUpListeners() // used for initial data fetch, subsription is automatically unsubbed
+    setUpOperationIndicators() // used to listen to successful operations and bad operations to display err messages to frontend & cancel the loading
     dispatch(initiateLoading())
     emitStartUpDataRequest()
   }, [])

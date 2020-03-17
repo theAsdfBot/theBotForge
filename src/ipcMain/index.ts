@@ -3,18 +3,17 @@ import { promises as fsp } from 'fs'
 
 import { BillingProfile } from '@typesTS/billingTypes'
 
-ipcMain.on('startup-data-request', event => {
-  const appDataPath = app.getPath('userData')
-  // console.log(appDataPath)
-  return fsp.readFile(`${appDataPath}\\testing\\billingProfiles.json`)
-    .then(data => {
-      const profiles = JSON.parse(data.toString()) // turning buffer into a string and parsing it into JS object
-      event.sender.send('send-billing-profiles', profiles)
-    })
-    .catch(err => {
-      console.error(err)
-      event.sender.send('bad-operation', err)
-    })
+import { fetchBillingProfiles } from '../fileOperations/billingProfiles'
+
+ipcMain.on('startup-data-request', async event => {
+  const [billingProfileResults] = await Promise.all([fetchBillingProfiles()]) //add other data fetches
+
+  const response = {
+    billingProfiles: {
+      ...billingProfileResults
+    }
+  }
+  event.sender.send('startup-data-response', response)
 })
 
 ipcMain.on('update-billing-profile', async (event, payload: BillingProfile) => {

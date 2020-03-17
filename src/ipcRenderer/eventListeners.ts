@@ -6,21 +6,14 @@ import { cancelLoading } from '../store/loading/action'
 
 // used for the initial fetch for data when app boots
 export const setUpAppStartUpListeners = () => {
-  ipcRenderer.on('startup-data-response', (event, payload) => {
+  ipcRenderer.once('startup-data-response', (event, payload) => {
+    const { billingProfiles } = payload
     setTimeout(() => {
-      store.dispatch(populateProfiles(payload))
+      if (billingProfiles.success) store.dispatch(populateProfiles(billingProfiles.profiles))
       store.dispatch(cancelLoading())
-
-      removeAppStartUpListeners() // remove the listerner once it does its job and we dont need it anymore
-    }, 5000)
+    }, 2000)
   })
 }
-
-const removeAppStartUpListeners = () => {
-  ipcRenderer.removeListener('startup-data-response', () => console.log('removed startup-data-response listener'))
-}
-
-
 
 // will be used for other things
 ipcRenderer.on('successful-operation', (event) => {

@@ -27,7 +27,7 @@ import {
   PaymentInfoKey
 } from './utils'
 import { RootState } from '../../store'
-import { emitUpdateProfile } from '../../ipcRenderer/eventEmitters'
+import { updateBillingProfile, deleteBillingProfile } from '../../store/billingProfiles/actions'
 
 const BillingView: FunctionComponent = () => {
   const [store, dispatch] = useReducer(billingProfileReducer, initialBillingStore)
@@ -52,12 +52,11 @@ const BillingView: FunctionComponent = () => {
     })
   }, [currentProfileData.currentId])
 
-  function toggleBillingMatchShipping() { // need to remove
+  function toggleBillingMatchShipping() {
     dispatch({
       type: SET_SHIPPING_TO_BILLING
     })
   }
-
 
   function saveProfile() {
     const userInfoValidationKeys = Object.keys(userInfoValidation)
@@ -123,8 +122,7 @@ const BillingView: FunctionComponent = () => {
     // If there's no errors, save profile
     if (areThereErrors === false) {
       dispatchErrors({ type: CLEAR_INPUT_FIELD_ERRORS_ALL })
-      emitUpdateProfile(store)
-      // rootDispatch(updateBillingProfile(store))
+      rootDispatch(updateBillingProfile(store))
     } else {
       dispatchErrors({ type: POPULATE_INPUT_FIELD_ERRORS, value: errorObj })
     }
@@ -157,7 +155,7 @@ const BillingView: FunctionComponent = () => {
           <PaymentDetails paymentDetails={store.payment} errors={inputErrors.payment} dispatch={dispatch} />
           <div className='flex justify-center mt-6'>
             <AppButton onClick={saveProfile} btnName='Save' classes='btn-gray mr-8 w-20' />
-            <AppButton onClick={() => 'rootDispatch(deleteBillingProfile(currentProfileData.currentId))'} btnName='Delete' classes='btn-gray w-20' />
+            <AppButton onClick={() => rootDispatch(deleteBillingProfile(currentProfileData.currentId))} btnName='Delete' classes='btn-gray w-20' />
           </div>
           <div className='flex justify-center mt-4'>
             <AppButton onClick={resetProfile} btnName='Reset' classes='btn-gray mx-0 my-auto w-20' />

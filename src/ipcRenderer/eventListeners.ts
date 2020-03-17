@@ -9,17 +9,20 @@ export const setUpAppStartUpListeners = () => {
   ipcRenderer.once('startup-data-response', (event, payload) => {
     const { billingProfiles } = payload
     setTimeout(() => {
+      // if error is file not found we don display error message. we're going to assume it's the user's first time using app
       if (billingProfiles.success) store.dispatch(populateProfiles(billingProfiles.profiles))
       store.dispatch(cancelLoading())
     }, 2000)
   })
 }
 
-// will be used for other things
-ipcRenderer.on('successful-operation', (event) => {
-  store.dispatch(cancelLoading())
-})
-ipcRenderer.on('bad-operation', (event, err) => {
-  console.error(err)
-  // dispatch(err to user)
-})
+export const setUpOperationIndicators = () => {
+  ipcRenderer.on('successful-operation', (event) => {
+    store.dispatch(cancelLoading())
+  })
+  ipcRenderer.on('unsuccessful-operation', (event, err) => {
+    console.error(err)
+    // dispatch(err to user)
+    store.dispatch(cancelLoading())
+  })
+}

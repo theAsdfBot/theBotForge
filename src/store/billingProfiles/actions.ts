@@ -4,7 +4,6 @@ import { ThunkAction, ThunkDispatch } from 'redux-thunk'
 import { FETCH_PROFILES, UPDATE_PROFILE, CREATE_PROFILE, DELETE_PROFILE, CHANGE_PROFILE } from './types'
 import { BillingProfile } from '@typesTS/billingTypes'
 import { RootState } from '../'
-import { initiateLoading } from '../loading/action'
 import { emitDeleteProfile, emitUpdateProfile } from '../../ipcRenderer/eventEmitters'
 import BillingProfileFactory from '../../factory/BillingProfile'
 
@@ -38,7 +37,6 @@ export const changeProfile: ActionCreator<Action> = (newId: string) => ({
 export const deleteBillingProfile = (id: string): ThunkAction<void, RootState, unknown, Action<string>> => {
   emitDeleteProfile(id)
   return (dispatch, getState) => {
-    dispatch(initiateLoading())
     dispatch(deleteProfile(id))
 
     const { billingProfiles } = getState()
@@ -51,7 +49,6 @@ export const deleteBillingProfile = (id: string): ThunkAction<void, RootState, u
 export const updateBillingProfile = (payload: BillingProfile): ThunkAction<void, RootState, unknown, Action<string>> => {
   emitUpdateProfile(payload)
   return dispatch => {
-    dispatch(initiateLoading())
     dispatch(updateProfile(payload))
   }
 }

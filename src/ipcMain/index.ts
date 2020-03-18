@@ -6,37 +6,36 @@ import { fetchBillingProfiles, updateBillingProfiles, deleteBillingProfile } fro
 
 // listens for this event only once
 ipcMain.once('startup-data-request', async event => {
-  const [billingProfileResults] = await Promise.all([fetchBillingProfiles()]) //add other data fetches
+  try {
+    const [billingProfileResults] = await Promise.all([fetchBillingProfiles()]) //add other data fetches
 
-  const response = {
-    billingProfiles: {
-      ...billingProfileResults
+    const response = {
+      billingProfiles: {
+        ...billingProfileResults
+      }
     }
+
+    event.sender.send('startup-data-response', response)
+  } catch (err) {
+    event.sender.send('unsuccessful-operation', err.message)
   }
-
-  event.sender.send('startup-data-response', response)
 })
 
-ipcMain.on('update-billing-profile', (event, payload: BillingProfile) => {
-  return updateBillingProfiles(payload)
-    .then(res => {
-      console.log(res)
-      if (res.success) {
-        event.sender.send('successful-operation')
-      } else {
-        event.sender.send('unsuccessful-operation', res.message)
-      }
-    })
+ipcMain.on('update-billing-profile', async (event, payload: BillingProfile) => {
+  try {
+    const res = await updateBillingProfiles(payload)
+    console.log(res)
+    event.sender.send('successful-operation')
+  } catch (err) {
+    event.sender.send('unsuccessful-operation', err.message)
+  }
 })
 
-ipcMain.on('delete-billing-profile', (event, id: string) => {
-  return deleteBillingProfile(id)
-    .then(res => {
-      console.log(res)
-      if (res.success) {
-        event.sender.send('successful-operation')
-      } else {
-        event.sender.send('unsuccessful-operation', res.message)
-      }
-    })
+ipcMain.on('delete-billing-profile', async (event, id: string) => {
+  try {
+    await deleteBillingProfile(id)
+    event.sender.send('successful-operation')
+  } catch (err) {
+    event.sender.send('unsuccessful-operation', err.message)
+  }
 })

@@ -8,7 +8,7 @@ export const setUpAppStartUpListeners = () => {
   ipcRenderer.once('startup-data-response', (event, payload) => {
     const { billingProfiles } = payload
     // if error is file not found we don display error message. we're going to assume it's the user's first time using app
-    if (billingProfiles.success) store.dispatch(populateProfiles(billingProfiles.profiles))
+    store.dispatch(populateProfiles(billingProfiles))
   })
 }
 

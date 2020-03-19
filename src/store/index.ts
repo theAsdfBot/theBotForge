@@ -3,11 +3,9 @@ import thunk from 'redux-thunk'
 import logger from 'redux-logger'
 
 import billingProfilesReducer from './billingProfiles/reducer'
-import loadingReducer from './loading/reducer'
 
 const mainReducer = combineReducers({
-  billingProfiles: billingProfilesReducer,
-  loading: loadingReducer
+  billingProfiles: billingProfilesReducer
 })
 
 export type RootState = ReturnType<typeof mainReducer> // typing the RootState because thunks requires the state type

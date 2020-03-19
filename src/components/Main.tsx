@@ -5,8 +5,6 @@ import NavBar from './nav/NavBar'
 import BillingView from './billing/BillingView'
 import Dashboard from './dashboard/Dashboard'
 
-import { RootState } from '../store'
-
 import { emitStartUpDataRequest } from '../ipcRenderer/eventEmitters'
 import { setUpAppStartUpListeners, setUpOperationIndicators, teardownOperationsIndicator } from '../ipcRenderer/eventListeners'
 
@@ -26,10 +24,10 @@ const Main = () => {
       <Router>
         <NavBar />
         <hr className='border-gray-850' />
-        {isLoading ? <h1 className='text-white'>LOADING</h1> : <Switch>
+        <Switch>
           <Route path='/' component={BillingView} />
           <Route path='/asdf' exact component={Dashboard} />
-        </Switch>}
+        </Switch>
       </Router>
     </div>
   )

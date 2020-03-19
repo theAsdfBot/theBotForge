@@ -7,12 +7,9 @@ import { fetchBillingProfiles, updateBillingProfiles, deleteBillingProfile } fro
 // listens for this event only once
 ipcMain.once('startup-data-request', async event => {
   try {
-    const [billingProfileResults] = await Promise.all([fetchBillingProfiles()]) //add other data fetches
-
+    const [billingProfiles] = await Promise.all([fetchBillingProfiles()]) //add other data fetches 
     const response = {
-      billingProfiles: {
-        ...billingProfileResults
-      }
+      billingProfiles
     }
 
     event.sender.send('startup-data-response', response)
@@ -23,8 +20,7 @@ ipcMain.once('startup-data-request', async event => {
 
 ipcMain.on('update-billing-profile', async (event, payload: BillingProfile) => {
   try {
-    const res = await updateBillingProfiles(payload)
-    console.log(res)
+    await updateBillingProfiles(payload)
     event.sender.send('successful-operation')
   } catch (err) {
     event.sender.send('unsuccessful-operation', err.message)

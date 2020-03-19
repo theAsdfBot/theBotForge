@@ -14,6 +14,7 @@ ipcMain.once('startup-data-request', async event => {
 
     event.sender.send('startup-data-response', response)
   } catch (err) {
+    console.log(err)
     event.sender.send('unsuccessful-operation', err.message)
   }
 })

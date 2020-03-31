@@ -3,7 +3,7 @@ import { HashRouter as Router, Route, Switch } from 'react-router-dom'
 
 import NavBar from './nav/NavBar'
 import BillingView from './billing/BillingView'
-import Dashboard from './dashboard/Dashboard'
+import Dashboard from './dashboard/DashboardView'
 
 import { emitStartUpDataRequest } from '../ipcRenderer/eventEmitters'
 import { setUpAppStartUpListeners, setUpOperationIndicators, teardownOperationsIndicator } from '../ipcRenderer/eventListeners'
@@ -25,8 +25,8 @@ const Main = () => {
         <NavBar />
         <hr className='border-gray-850' />
         <Switch>
-          <Route path='/' component={BillingView} />
-          <Route path='/asdf' exact component={Dashboard} />
+          <Route path='/' exact component={Dashboard} />
+          <Route path='/billing-profiles' component={BillingView} />
         </Switch>
       </Router>
     </div>

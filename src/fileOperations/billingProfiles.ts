@@ -3,18 +3,21 @@ import fs, { promises as fsp } from 'fs'
 
 import { BillingProfile } from '@typesTS/billingTypes'
 
-const billingProfilesFileExist = () => {
+export const getLocation = () => {
   const appDataPath = app.getPath('appData')
-  return fs.existsSync(`${appDataPath}\\testing\\billingProfiles.json`)
+  return `${appDataPath}\\testing\\billingProfiles.json`
+}
+
+export const billingProfilesFileExist = () => {
+  return fs.existsSync(getLocation())
 }
 
 export const fetchBillingProfiles = async () => {
-  const appDataPath = app.getPath('appData')
   const fileExist = await billingProfilesFileExist()
   console.log('file exist', fileExist)
   if (!fileExist) return []
 
-  const data = await fsp.readFile(`${appDataPath}\\testing\\billingProfiles.json`)
+  const data = await fsp.readFile(getLocation())
   // need to handle invalid JSON formats
   const profiles = JSON.parse(data.toString()) // turning buffer into a string and parsing it into JS object
   if (!Array.isArray(profiles)) {
@@ -25,7 +28,6 @@ export const fetchBillingProfiles = async () => {
 
 // used to make updates to existing profiles and to add new profiles
 export const updateBillingProfiles = async (payload: BillingProfile) => {
-  const appDataPath = app.getPath('appData')
   const profiles: BillingProfile[] = await fetchBillingProfiles()
   let updatedProfiles: BillingProfile[] = []
   console.log('profiles call in updateBillingProfiles function:', profiles)
@@ -36,12 +38,11 @@ export const updateBillingProfiles = async (payload: BillingProfile) => {
   } else {
     updatedProfiles = [payload, ...profiles]
   }
-  await fsp.writeFile(`${appDataPath}\\testing\\billingProfiles.json`, JSON.stringify(updatedProfiles))
+  await fsp.writeFile(getLocation(), JSON.stringify(updatedProfiles))
 }
 
 export const deleteBillingProfile = async (id: string) => {
-  const appDataPath = app.getPath('appData')
   const profiles = await fetchBillingProfiles()
   const updatedProfiles: BillingProfile[] = profiles.filter((profile: BillingProfile) => profile.id !== id)
-  await fsp.writeFile(`${appDataPath}\\testing\\billingProfiles.json`, JSON.stringify(updatedProfiles))
+  await fsp.writeFile(getLocation(), JSON.stringify(updatedProfiles))
 }

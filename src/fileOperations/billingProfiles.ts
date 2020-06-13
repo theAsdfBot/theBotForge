@@ -1,5 +1,5 @@
 import { app } from 'electron'
-import fs, { promises as fsp } from 'fs'
+import fs from 'fs'
 
 import { BillingProfile } from '@typesTS/billingTypes'
 
@@ -17,7 +17,7 @@ export const fetchBillingProfiles = async () => {
   console.log('file exist', fileExist)
   if (!fileExist) return []
 
-  const data = await fsp.readFile(getLocation())
+  const data = await fs.promises.readFile(getLocation())
   // need to handle invalid JSON formats
   const profiles = JSON.parse(data.toString()) // turning buffer into a string and parsing it into JS object
   if (!Array.isArray(profiles)) {
@@ -38,11 +38,11 @@ export const updateBillingProfiles = async (payload: BillingProfile) => {
   } else {
     updatedProfiles = [payload, ...profiles]
   }
-  await fsp.writeFile(getLocation(), JSON.stringify(updatedProfiles))
+  await fs.promises.writeFile(getLocation(), JSON.stringify(updatedProfiles))
 }
 
 export const deleteBillingProfile = async (id: string) => {
   const profiles = await fetchBillingProfiles()
   const updatedProfiles: BillingProfile[] = profiles.filter((profile: BillingProfile) => profile.id !== id)
-  await fsp.writeFile(getLocation(), JSON.stringify(updatedProfiles))
+  await fs.promises.writeFile(getLocation(), JSON.stringify(updatedProfiles))
 }

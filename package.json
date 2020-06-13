@@ -10,6 +10,7 @@
     "make": "electron-forge make",
     "publish": "electron-forge publish",
     "lint": "tslint -c tslint.json -p tsconfig.json",
+    "test": "jest",
     "lint-fix": "tslint -c tslint.json -p tsconfig.json --fix"
   },
   "keywords": [],

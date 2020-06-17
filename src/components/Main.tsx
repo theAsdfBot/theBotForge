@@ -11,7 +11,7 @@ import { setUpAppStartUpListeners, setUpOperationIndicators, teardownOperationsI
 const Main = () => {
   useEffect(() => {
     // componentDidMount 
-    setUpAppStartUpListeners() // used for initial data fetch, subsription is automatically unsubbed
+    setUpAppStartUpListeners() // used for initial data fetch, subscription is automatically unsubbed
     setUpOperationIndicators() // used to listen to successful operations and bad operations to display err messages to frontend & cancel the loading
 
     emitStartUpDataRequest()

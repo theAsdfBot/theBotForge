@@ -1,4 +1,5 @@
 import { BillingProfileActionTypes, BillingProfileState, FETCH_PROFILES, UPDATE_PROFILE, CREATE_PROFILE, DELETE_PROFILE, CHANGE_PROFILE } from './types'
+import BillingProfileFactory from '../../factory/BillingProfile'
 
 const initialState: BillingProfileState = {
   profiles: [],
@@ -8,9 +9,17 @@ const initialState: BillingProfileState = {
 const billingProfilesReducer = (state = initialState, action: BillingProfileActionTypes): BillingProfileState => {
   switch (action.type) {
     case FETCH_PROFILES:
-      return {
-        currentId: action.payload.length > 0 ? action.payload[0].id : '',
-        profiles: action.payload
+      if (action.payload.length >= 1) {
+        return {
+          currentId: action.payload[0].id,
+          profiles: action.payload
+        }
+      } else { // if user doesn't have any billing profiles saved, generate an instance of it for them 
+        const emptyBillingProfile = BillingProfileFactory()
+        return {
+          currentId: emptyBillingProfile.id,
+          profiles: [emptyBillingProfile]
+        }
       }
     case UPDATE_PROFILE:
       return {
@@ -30,9 +39,12 @@ const billingProfilesReducer = (state = initialState, action: BillingProfileActi
         profiles: [action.payload, ...state.profiles]
       }
     case DELETE_PROFILE:
-      const filteredBillingProfiles = state.profiles.filter(profile => profile.id !== action.id)
+      const filteredBillingProfiles = state.profiles.filter(profile => profile.id !== action.id) // if deleted profile was the last one, generate an empty for user
+      if (filteredBillingProfiles.length === 0) {
+        filteredBillingProfiles.push(BillingProfileFactory())
+      }
       return {
-        currentId: filteredBillingProfiles.length > 0 ? filteredBillingProfiles[0].id : '',
+        currentId: filteredBillingProfiles[0].id,
         profiles: filteredBillingProfiles
       }
     case CHANGE_PROFILE:

@@ -65,7 +65,7 @@ const BillingView: FunctionComponent = () => {
     dispatchEditable(!editable)
   }
 
-  function saveProfile() {
+  const saveProfile = () => {
     const userInfoValidationKeys = Object.keys(userInfoValidation)
     const paymentInfoValidationKeys = Object.keys(paymentInfoValidation)
     let areThereErrors = false
@@ -145,9 +145,9 @@ const BillingView: FunctionComponent = () => {
             <AppButton onClick={() => rootDispatch(createProfile())} btnName='New' classes='btn-gray w-20 ml-6' />
           </div>
         </div>
-        <UserDetails name='Billing View' userDetails={store.billing} errors={inputErrors.billing} dispatch={dispatch} onChangeActionType={UPDATE_BILLING_KEY} editable={editable} />
+        <UserDetails name='Billing Address' userDetails={store.billing} errors={inputErrors.billing} dispatch={dispatch} onChangeActionType={UPDATE_BILLING_KEY} editable={editable} />
         <div>
-          <UserDetails name='Shipping View' userDetails={store.shipping} errors={inputErrors.shipping} dispatch={dispatch} onChangeActionType={UPDATE_SHIPPING_KEY} billingSameAsShipping={store.billingSameAsShipping} editable={editable} />
+          <UserDetails name='Shipping Address' userDetails={store.shipping} errors={inputErrors.shipping} dispatch={dispatch} onChangeActionType={UPDATE_SHIPPING_KEY} billingSameAsShipping={store.billingSameAsShipping} editable={editable} />
           <div>
             <input className='ml-8 mr-1' type='checkbox' name='Same as Billing Address' onChange={toggleBillingMatchShipping} checked={store.billingSameAsShipping} disabled={!editable} />
             <label className='text-white'>Same as Billing Address</label>

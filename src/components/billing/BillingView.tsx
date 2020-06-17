@@ -1,10 +1,11 @@
-import React, { FunctionComponent, useReducer, useEffect } from 'react'
+import React, { FunctionComponent, useReducer, useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import ProfileSelector from './profileSelector/ProfileSelector'
 import PaymentDetails from './details/PaymentDetails'
 import UserDetails from './details/UserDetails'
 import AppButton from '../common/AppButton'
+
 import {
   initialBillingStore,
   initialInputErrorStore,
@@ -32,7 +33,7 @@ import { updateBillingProfile, deleteBillingProfile, createProfile } from '../..
 const BillingView: FunctionComponent = () => {
   const [store, dispatch] = useReducer(billingProfileReducer, initialBillingStore)
   const [inputErrors, dispatchErrors] = useReducer(inputFieldErrorsReducer, initialInputErrorStore)
-
+  const [editable, dispatchEditable] = useState(false)
   const rootDispatch = useDispatch()
 
   const currentProfileData = useSelector((state: RootState) => {
@@ -50,12 +51,18 @@ const BillingView: FunctionComponent = () => {
     dispatchErrors({
       type: CLEAR_INPUT_FIELD_ERRORS_ALL
     })
+    dispatchEditable(false)
   }, [currentProfileData.currentId])
 
-  function toggleBillingMatchShipping() {
+  const toggleBillingMatchShipping = () => {
     dispatch({
       type: SET_SHIPPING_TO_BILLING
     })
+  }
+
+  const toggleEditable = () => {
+    // TODO: workflow: If user hits the lock button, run saveProfile function; check for errors, if error prevent the lock and keep the profile in edit mode and have user fix profile until error is resolved?
+    dispatchEditable(!editable)
   }
 
   function saveProfile() {
@@ -73,7 +80,6 @@ const BillingView: FunctionComponent = () => {
       userInfoValidationKeys.forEach((key: UserInfoKey) => {
         const validationFncs = userInfoValidation[key]
         const inputVal = store.shipping[key]
-        console.log(key, inputVal)
         let error = ''
         for (const fnc of validationFncs) {
           error = fnc(inputVal)
@@ -91,7 +97,6 @@ const BillingView: FunctionComponent = () => {
     userInfoValidationKeys.forEach((key: UserInfoKey) => {
       const validationFncs = userInfoValidation[key]
       const inputVal = store.billing[key]
-      console.log(key, inputVal)
       let error = ''
       for (const fnc of validationFncs) {
         error = fnc(inputVal)
@@ -106,7 +111,6 @@ const BillingView: FunctionComponent = () => {
     paymentInfoValidationKeys.forEach((key: PaymentInfoKey) => {
       const validationFncs = paymentInfoValidation[key]
       const inputVal = store.payment[key]
-      console.log(key, inputVal)
       let error = ''
       for (const fnc of validationFncs) {
         error = fnc(inputVal)
@@ -117,8 +121,6 @@ const BillingView: FunctionComponent = () => {
         areThereErrors = true
       }
     })
-    console.log(errorObj)
-    console.log(areThereErrors)
     // If there's no errors, save profile
     if (areThereErrors === false) {
       dispatchErrors({ type: CLEAR_INPUT_FIELD_ERRORS_ALL })
@@ -139,20 +141,20 @@ const BillingView: FunctionComponent = () => {
         <div className='ml-12 mr-8'>
           <ProfileSelector />
           <div className='mt-4 flex justify-center align-center'>
-            <AppButton onClick={() => console.log('allow edit to current profile')} btnName='Edit' classes='btn-gray w-20' />
+            <AppButton onClick={() => toggleEditable()} btnName={editable ? 'Lock' : 'Edit'} classes='btn-gray w-20' />
             <AppButton onClick={() => rootDispatch(createProfile())} btnName='New' classes='btn-gray w-20 ml-6' />
           </div>
         </div>
-        <UserDetails name='Billing View' userDetails={store.billing} errors={inputErrors.billing} dispatch={dispatch} onChangeActionType={UPDATE_BILLING_KEY} />
+        <UserDetails name='Billing View' userDetails={store.billing} errors={inputErrors.billing} dispatch={dispatch} onChangeActionType={UPDATE_BILLING_KEY} editable={editable} />
         <div>
-          <UserDetails name='Shipping View' userDetails={store.shipping} errors={inputErrors.shipping} dispatch={dispatch} onChangeActionType={UPDATE_SHIPPING_KEY} billingSameAsShipping={store.billingSameAsShipping} />
+          <UserDetails name='Shipping View' userDetails={store.shipping} errors={inputErrors.shipping} dispatch={dispatch} onChangeActionType={UPDATE_SHIPPING_KEY} billingSameAsShipping={store.billingSameAsShipping} editable={editable} />
           <div>
-            <input className='ml-8 mr-1' type='checkbox' name='Same as Billing Address' onChange={toggleBillingMatchShipping} />
+            <input className='ml-8 mr-1' type='checkbox' name='Same as Billing Address' onChange={toggleBillingMatchShipping} checked={store.billingSameAsShipping} disabled={!editable} />
             <label className='text-white'>Same as Billing Address</label>
           </div>
         </div>
         <div className='w-80 mx-6'>
-          <PaymentDetails paymentDetails={store.payment} errors={inputErrors.payment} dispatch={dispatch} />
+          <PaymentDetails paymentDetails={store.payment} errors={inputErrors.payment} dispatch={dispatch} editable={editable} />
           <div className='flex justify-center mt-6'>
             <AppButton onClick={saveProfile} btnName='Save' classes='btn-gray mr-8 w-20' />
             <AppButton onClick={() => rootDispatch(deleteBillingProfile(currentProfileData.currentId))} btnName='Delete' classes='btn-gray w-20' />

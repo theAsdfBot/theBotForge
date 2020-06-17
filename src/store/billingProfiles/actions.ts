@@ -1,5 +1,5 @@
 import { Action, ActionCreator } from 'redux'
-import { ThunkAction, ThunkDispatch } from 'redux-thunk'
+import { ThunkAction } from 'redux-thunk'
 
 import { FETCH_PROFILES, UPDATE_PROFILE, CREATE_PROFILE, DELETE_PROFILE, CHANGE_PROFILE } from './types'
 import { BillingProfile } from '@typesTS/billingTypes'
@@ -36,13 +36,8 @@ export const changeProfile: ActionCreator<Action> = (newId: string) => ({
 // thunks 
 export const deleteBillingProfile = (id: string): ThunkAction<void, RootState, unknown, Action<string>> => {
   emitDeleteProfile(id)
-  return (dispatch, getState) => {
+  return (dispatch) => { // TODO: add event listener to lsiten for a deleteProfileSuccessEvent and then remove profile front FE? Same for the updateBillingProfile function below (might remove these thunks from billingProfile; doesn't seem to be needed anymore)
     dispatch(deleteProfile(id))
-
-    const { billingProfiles } = getState()
-    if (billingProfiles.profiles.length === 0) {
-      dispatch(createProfile())
-    }
   }
 }
 

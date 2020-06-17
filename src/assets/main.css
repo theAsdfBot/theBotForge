@@ -15,8 +15,6 @@ input::placeholder {
 }
 
 .overlay {
-  height: 450px;
-  width: inherit;
   z-index: 10;
   @apply absolute opacity-25 bg-black-netflix rounded;
 }

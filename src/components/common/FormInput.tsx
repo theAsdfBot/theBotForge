@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ChangeEvent, Fragment } from 'react'
 
-type FormTextProps = {
+type FormInputProps = {
   onChange: (e: ChangeEvent<HTMLElement>) => void,
   type: string,
   name: string,
@@ -13,7 +13,7 @@ type FormTextProps = {
   classes?: string,// classes (additional classes that modifies adds onto the default classes (maybe more margin or padding)?)
 }
 
-const FormText: FunctionComponent<FormTextProps> = ({ type, name, placeholder, value, disabled, error, onChange, maxLength, size, classes }) => {
+const FormInput: FunctionComponent<FormInputProps> = ({ type, name, placeholder, value, disabled, error, onChange, maxLength, size, classes }) => {
   return (
     <Fragment>
       <input
@@ -32,12 +32,12 @@ const FormText: FunctionComponent<FormTextProps> = ({ type, name, placeholder, v
   )
 }
 
-FormText.defaultProps = {
+FormInput.defaultProps = {
   maxLength: 50,
   size: 20,
   disabled: false,
   classes: '',
   error: ''
-} as Partial<FormTextProps>
+} as Partial<FormInputProps>
 
-export default FormText
+export default FormInput

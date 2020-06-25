@@ -25,8 +25,8 @@ const Main = () => {
         <NavBar />
         <hr className='border-gray-850' />
         <Switch>
-          <Route path='/' component={BillingView} />
-          <Route path='/asdf' exact component={Dashboard} />
+          <Route path='/' exact component={Dashboard} />
+          <Route path='/billing-profiles' component={BillingView} />
         </Switch>
       </Router>
     </div>

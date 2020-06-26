@@ -29,15 +29,14 @@ const sampleData = [
 const Dashboard: FunctionComponent = () => {
   return (
     <div className='w-full'>
-      <table className='text-white w-11/12 mt-4 mx-auto'>
+      <div id='table-remove-id-later' className='text-white w-11/12 mt-4 mx-auto'>
         <DashboardHeader />
-        <div className='h-2'>{/* to be removed. not sure how to add spacing between thead and tbody*/}</div>
-        <tbody>
+        <div id='table-body'>
           {sampleData.map(data => {
             return <DashboardTask {...data} />
           })}
-        </tbody>
-      </table>
+        </div>
+      </div>
     </div>
   )
 }

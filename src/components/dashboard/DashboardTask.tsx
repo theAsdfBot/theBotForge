@@ -13,17 +13,17 @@ type DashboardTaskProps = {
 
 const DashboardTask: FunctionComponent<DashboardTaskProps> = ({ taskName, website, keywords, size, profileDisplayName, proxy, status }) => {
   return (
-    <tr className='h-10 border-gray-700 border-2'>
-      <td>{taskName}</td>
-      <td>{website}</td>
-      <td>{keywords.reduce((fullString, wordOrLink) => {
+    <div className='h-10 border-gray-700 border-2 rounded-lg'>
+      <span>{taskName}</span>
+      <span>{website}</span>
+      <span>{keywords.reduce((fullString, wordOrLink) => {
         return `${fullString} ${wordOrLink} `
-      }, '')}</td>
-      <td>{size}</td>
-      <td>{profileDisplayName}</td>
-      <td>{proxy}</td>
-      <td>{status}</td>
-    </tr>
+      }, '')}</span>
+      <span>{size}</span>
+      <span>{profileDisplayName}</span>
+      <span>{proxy}</span>
+      <span>{status}</span>
+    </div>
   )
 }
 

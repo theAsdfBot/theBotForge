@@ -29,7 +29,7 @@ const sampleData = [
 const Dashboard: FunctionComponent = () => {
   return (
     <div className='w-full'>
-      <div id='table-remove-id-later' className='text-white w-11/12 mt-4 mx-auto'>
+      <div className='text-white w-11/12 mt-4 mx-auto'>
         <DashboardHeader />
         <div id='table-body'>
           {sampleData.map(data => {

@@ -18,6 +18,15 @@ input::placeholder {
   z-index: 10;
   @apply absolute opacity-25 bg-black-netflix rounded;
 }
+
+.dashboard-item {
+  display: inline-grid;
+  grid-template-columns: 75px 75px 150px 50px 75px 85px 100px auto;
+  grid-template-rows: 1;
+  column-gap: 30px;
+  width: 100%;
+}
+
 /* used to determine which element can be used to drag it around the screen */
 .draggable {
   -webkit-app-region: drag;

@@ -5,7 +5,7 @@ import DashboardTask from './DashboardTask'
 
 const sampleData = [
   {
-    taskName: 'testing',
+    taskName: 'testingferwerwrq3we2421',
     website: 'kith',
     keywords: ['Offwhite', 'Tee', 'Jordan 1'],
     size: 'S',
@@ -26,10 +26,11 @@ const sampleData = [
   },
 ]
 
+// TODO: add pagination 
 const Dashboard: FunctionComponent = () => {
   return (
     <div className='w-full'>
-      <div className='text-white w-11/12 mt-4 mx-auto'>
+      <div className='text-white w-11/12 mt-4 mx-auto text-sm'>
         <DashboardHeader />
         <div id='table-body'>
           {sampleData.map(data => {

@@ -1,22 +1,15 @@
 import React, { FunctionComponent } from 'react'
 
-const tableHeaders = [
-  'TASK',
-  'WEBSITE',
-  'KEYWORDS/LINKS',
-  'SIZE',
-  'PROFILE',
-  'SIZE',
-  'PROXY',
-  'STATUS'
-]
-
 const DashboardHeader: FunctionComponent = () => {
   return (
-    <div className='bg-gray-850 h-12 flex justify-start mb-2'>
-      {tableHeaders.map((title, idx) => {
-        return <span className={`py-3 ${idx > 0 ? 'mx-10' : 'ml-20 mr-10'}`}>{title}</span>
-      })}
+    <div className='bg-gray-850 h-12 mb-2 pl-6 dashboard-item'>
+      <span className='py-3'>TASK</span>
+      <span className='py-3'>WEBSITE</span>
+      <span className='py-3'>KEYWORDS/LINKS</span>
+      <span className='py-3 text-center'>SIZE</span>
+      <span className='py-3'>PROFILE</span>
+      <span className='py-3'>PROXY</span>
+      <span className='py-3'>STATUS</span>
     </div>
   )
 }

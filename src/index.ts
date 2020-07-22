@@ -15,7 +15,7 @@ const createWindow = () => {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     height: 750,
-    width: 1500,
+    width: 1300,
     resizable: false,
     titleBarStyle: 'customButtonsOnHover',
     frame: false,
@@ -28,7 +28,7 @@ const createWindow = () => {
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 
   // Emitted when the window is closed.
   mainWindow.on('closed', () => {
